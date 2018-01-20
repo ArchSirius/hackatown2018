@@ -9,8 +9,6 @@
  * PUT     /api/users/:id/password ->  password
  */
 
-'use strict';
-
 var _    = require('lodash');
 var User = require('./user.model');
 var auth = require('../../auth/auth.service')

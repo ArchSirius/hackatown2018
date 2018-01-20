@@ -1,5 +1,3 @@
-'use strict';
-
 var crypto       = require('crypto');
 var mongoose     = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -32,8 +30,7 @@ UserSchema
   .get(function() {
     return {
       '_id': this._id,
-      'username': this.username,
-      'name': this.name
+      'username': this.username
     };
   });
 
