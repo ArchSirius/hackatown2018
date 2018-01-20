@@ -78,3 +78,24 @@ _Change patch status_
 ```
 
 **Return**: Nothing
+
+### `GET api/users/:id`
+_Get specific user_
+
+**Body**: Nothing
+
+**Return**:
+```
+{
+  "id": UUID,
+  "name": String,
+  "carepoints": Integer,
+  "skills": [ 
+    {
+      "name": String,
+      "value": Integer
+    }, 
+    ... 
+  ]
+}
+```
