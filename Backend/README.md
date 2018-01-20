@@ -18,7 +18,7 @@ _Get all active tasks_
       "creator": UUID,
       "applicants": [ UUID, UUID, ... ],
       "chosen": UUID or undefined,
-      "status": "created", "pending" or "done"
+      "done": Boolean
     },
     ...
   ]
@@ -60,7 +60,7 @@ _Apply on a task or choose an applicant_
   "creator": UUID,
   "applicants": [ UUID, UUID, ... ],
   "chosen": UUID or undefined,
-  "status": "created", "pending" or "done"
+  "done": Boolean
 }
 ```
 
@@ -73,7 +73,7 @@ _Change task status_
 ```
 {
   "id": UUID,
-  "status": "created", "pending" or "done"
+  "done": Boolean
 }
 ```
 
@@ -89,7 +89,7 @@ _Change task status_
     "creator": UUID,
     "applicants": [ UUID, UUID, ... ],
     "chosen": UUID or undefined,
-    "status": "created", "pending" or "done"
+    "done": Boolean
   },
   "creator": {
     "id": UUID,

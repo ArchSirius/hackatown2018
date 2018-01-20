@@ -27,10 +27,9 @@ var TaskSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  status: {
-    type: String,
-    enum: ['created', 'pending', 'done'],
-    default: 'created'
+  done: {
+    type: Boolean,
+    default: false
   }
 });
 
