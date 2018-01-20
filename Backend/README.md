@@ -127,7 +127,7 @@ _Get specific user_
 ```
 {
   "id": UUID,
-  "name": String,
+  "username": String,
   "carepoints": Integer,
   "skills": [ 
     {

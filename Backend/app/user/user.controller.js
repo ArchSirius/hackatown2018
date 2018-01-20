@@ -120,7 +120,6 @@ exports.show = function(req, res) {
 /**
  * Deletes a user
  * restriction: authenticated
- * restriction: self
  */
 exports.destroy = function(req, res) {
   return User.findById(req.params.id, '-salt -password').exec()
@@ -132,7 +131,6 @@ exports.destroy = function(req, res) {
 /**
  * Change a users password
  * restriction: authenticated
- * restriction: self
  */
 exports.changePassword = function(req, res) {
   var oldPass = String(req.body.oldPassword);

@@ -17,7 +17,25 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  salt: String
+  salt: String,
+  points: {
+    type: Number,
+    default: 0
+  },
+  skills: {
+    type: [{
+      name: {
+        type: String,
+        required: true
+      },
+      value: {
+        type: Number,
+        min: 0,
+        default: 0
+      }
+    }],
+    default: []
+  }
 });
 
 /**
@@ -30,7 +48,8 @@ UserSchema
   .get(function() {
     return {
       '_id': this._id,
-      'username': this.username
+      'username': this.username,
+      'skills': this.skills
     };
   });
 
