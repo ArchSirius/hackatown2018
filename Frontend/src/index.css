@@ -1,5 +1,10 @@
+/** Own global styles **/
+
+html,
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  height: 100vh;
+  background-color: #eff0f1;
+  font-family: 'Roboto', 'Segoe UI', 'Lucida Grande', 'Ubuntu', sans-serif;
 }
