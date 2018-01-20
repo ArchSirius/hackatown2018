@@ -1,7 +1,5 @@
 ## Routes specifications
 
-- [`GET api/tasks`](#GET-api/tasks)
-
 ### `GET api/tasks`
 _Get all active tasks_
 
