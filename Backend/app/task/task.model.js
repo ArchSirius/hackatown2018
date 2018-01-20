@@ -13,10 +13,14 @@ var TaskSchema = new Schema({
     required: true,
     default: 0
   },
+  relevantSkills: {
+    type: [String],
+    default: []
+  },
   creator: {
     type: Schema.ObjectId,
-    ref: 'User'/*,
-    required: true*/
+    ref: 'User',
+    required: true
   },
   applicants: [{
     type: Schema.ObjectId,
