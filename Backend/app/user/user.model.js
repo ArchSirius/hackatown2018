@@ -32,7 +32,8 @@ var UserSchema = new Schema({
         type: Number,
         min: 0,
         default: 0
-      }
+      },
+      _id : false
     }],
     default: []
   }

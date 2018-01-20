@@ -14,7 +14,7 @@ var TaskSchema = new Schema({
     default: 0
   },
   relevantSkills: {
-    type: [String],
+    type: [ String ],
     default: []
   },
   creator: {

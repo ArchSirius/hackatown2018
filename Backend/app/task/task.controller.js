@@ -70,7 +70,16 @@ function handleError(res, statusCode) {
  * Get list of tasks
  */
 exports.index = function(req, res) {
-  return Task.find({}).exec()
+  return Task.find({})
+    .populate({
+      path: 'creator',
+      select: 'username'
+    })
+    .populate({
+      path: 'applicants',
+      select: 'username skills'
+    })
+    .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -88,7 +97,16 @@ exports.create = function(req, res) {
  * Get a single task
  */
 exports.show = function(req, res) {
-  return Task.findById(req.params.id).exec()
+  return Task.findById(req.params.id)
+    .populate({
+      path: 'creator',
+      select: 'username'
+    })
+    .populate({
+      path: 'applicants',
+      select: 'username skills'
+    })
+    .exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -111,7 +129,15 @@ exports.update = function(req, res) {
   if (req.body.hasOwnProperty('_id')) {
     delete req.body._id;
   }
-  Task.findById(req.params.id).exec()
+  Task.findById(req.params.id)
+    .populate({
+      path: 'creator',
+      select: 'username'
+    })
+    .populate({
+      path: 'applicants',
+      select: 'username skills'
+    }).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
