@@ -1,8 +1,10 @@
 ## Routes specifications
 
-# `GET api/tasks`
-__Get all active tasks__
+### `GET api/tasks`
+_Get all active tasks_
+
 **Body**: Nothing
+
 **Return**:
 ```
 {
@@ -23,8 +25,9 @@ __Get all active tasks__
 }
 ```
 
-# `POST api/tasks`
-__Create a new task__
+### `POST api/tasks`
+_Create a new task_
+
 **Body**:
 ```
 {
@@ -35,6 +38,7 @@ __Create a new task__
   "creator": UUID
 }
 ```
+
 **Return**:
 ```
 {
@@ -42,8 +46,9 @@ __Create a new task__
 }
 ```
 
-# `PUT api/tasks/:id`
-__Apply on a task or choose an applicant__
+### `PUT api/tasks/:id`
+_Apply on a task or choose an applicant_
+
 **Body**:
 ```
 {
@@ -58,10 +63,12 @@ __Apply on a task or choose an applicant__
   "status": "created", "pending" or "done"
 }
 ```
+
 **Return**: Nothing
 
-# `PATCH api/tasks/:id`
-__Change patch status__
+### `PATCH api/tasks/:id`
+_Change patch status_
+
 **Body**:
 ```
 {
@@ -69,4 +76,5 @@ __Change patch status__
   "status": "created", "pending" or "done"
 }
 ```
+
 **Return**: Nothing
