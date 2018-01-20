@@ -67,7 +67,7 @@ _Apply on a task or choose an applicant_
 **Return**: Nothing
 
 ### `PATCH api/tasks/:id`
-_Change patch status_
+_Change task status_
 
 **Body**:
 ```
@@ -77,7 +77,46 @@ _Change patch status_
 }
 ```
 
-**Return**: Nothing
+**Return**:
+```
+{
+  "task": {
+    "id": UUID,
+    "name": String,
+    "category": String,
+    "description": String,
+    "carepoints": Integer,
+    "creator": UUID,
+    "applicants": [ UUID, UUID, ... ],
+    "chosen": UUID or undefined,
+    "status": "created", "pending" or "done"
+  },
+  "creator": {
+    "id": UUID,
+    "name": String,
+    "carepoints": Integer,
+    "skills": [ 
+      {
+        "name": String,
+        "value": Integer
+      }, 
+      ... 
+    ]
+  },
+  "chosen": {
+    "id": UUID,
+    "name": String,
+    "carepoints": Integer,
+    "skills": [ 
+      {
+        "name": String,
+        "value": Integer
+      }, 
+      ... 
+    ]
+  }
+}
+```
 
 ### `GET api/users/:id`
 _Get specific user_
