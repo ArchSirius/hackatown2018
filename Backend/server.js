@@ -5,6 +5,7 @@ var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var config      = require('./config');
+var seed        = require('./seed');
 
 var port = process.env.PORT || 8080;
 
@@ -15,6 +16,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 require('./routes.js')(app);
+
+seed();
 
 var server = http.createServer(app);
 
