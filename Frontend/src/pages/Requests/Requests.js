@@ -8,6 +8,8 @@ import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
 import skillsConstants from '../../constants/skillsConstants';
+var Tooltip = require('pui-react-tooltip').Tooltip;
+var OverlayTrigger = require('pui-react-overlay-trigger').OverlayTrigger;
 
 const RequestsBody = styled.div`padding: 0 100px;`;
 
@@ -236,17 +238,34 @@ class RequestView extends React.Component {
                               <Skills>
                                 {applicant.skills
                                   ? applicant.skills.map((skill, index) => (
-                                      <Skill key={index}>
-                                        <Points>{skill.value}</Points>
-                                        <SkillImage
-                                          src={
-                                            skillsConstants[
-                                              skill.name.replace(/\s+/g, '')
-                                            ].iconPath
-                                          }
-                                          alt=""
-                                        />
-                                      </Skill>
+                                      <OverlayTrigger
+                                        placement="bottom"
+                                        overlay={
+                                          <Tooltip>
+                                            {
+                                              skillsConstants[
+                                                skill.name.replace(/\s+/g, '')
+                                              ].tooltip
+                                            }
+                                          </Tooltip>
+                                        }
+                                      >
+                                        <Skill
+                                          key={index}
+                                          className="overlay-trigger"
+                                          tabIndex="0"
+                                        >
+                                          <Points>{skill.value}</Points>
+                                          <SkillImage
+                                            src={
+                                              skillsConstants[
+                                                skill.name.replace(/\s+/g, '')
+                                              ].iconPath
+                                            }
+                                            alt=""
+                                          />
+                                        </Skill>
+                                      </OverlayTrigger>
                                     ))
                                   : null}
                               </Skills>
