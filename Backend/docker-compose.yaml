@@ -1,0 +1,25 @@
+version: '3'                                                                                                                                                                                                                                 
+
+services:                                                                                                                                                                                                                                    
+  backend:
+    build: .
+    environment:
+      MONGODB_URI: "mongodb://db/hackatown2018"
+      SECRET: "hwhk7lumNzVTldE9dNRblx0r1e5YFyjq"
+      SEED: "true"
+    links:
+      - db
+    ports:
+      - "8080:8080"
+    restart: always
+
+  db:
+    image: mongo
+    restart: always
+    volumes:
+      - configdb:/data/configdb
+      - db:/data/db
+
+volumes:
+  configdb:
+  db:

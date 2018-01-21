@@ -1,0 +1,14 @@
+{
+  "name": "hackatown2018",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.16.1",
+    "mongoose": "^4.6.1",
+    "morgan": "^1.7.0"
+  }
+}
