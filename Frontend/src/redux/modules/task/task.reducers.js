@@ -9,12 +9,12 @@ const byId = (state = null, action) => {
     case types.CREATE_TASK_SUCCESS:
       return {
         ...state,
-        [action.task.id]: action.task
+        [action.task._id]: action.task
       };
     case types.UPDATE_TASK_SUCCESS:
       return {
         ...state,
-        [action.res.task.id]: action.res.task
+        [action.res._id]: action.res
       };
     default:
       return state;

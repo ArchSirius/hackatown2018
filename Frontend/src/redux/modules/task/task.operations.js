@@ -26,10 +26,12 @@ export const updateTask = task => dispatch => {
 };
 
 export const updateTaskStatus = task => dispatch => {
-  return updateTask({
-    ...task,
-    done: true
-  });
+  return dispatch(
+    updateTask({
+      ...task,
+      done: true
+    })
+  );
 };
 
 export default {

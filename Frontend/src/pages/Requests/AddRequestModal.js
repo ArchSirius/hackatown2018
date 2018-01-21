@@ -7,13 +7,13 @@ import Modal from 'react-modal';
 
 // https://www.npmjs.com/package/react-modal
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -29,73 +29,99 @@ const CompleteButton = styled(Button)`
   }
 `;
 
+const FormWrapper = styled.form`
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  width: 100%;
+`;
+
 class AddRequestModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '', 
-      description: '', 
-      address: '', 
-      value: '', 
+      name: '',
+      description: '',
+      address: '',
+      value: '',
       relevantSkills: ''
     };
   }
-  
-  changeName = (event) => {
-    this.setState({name: event.target.value});
-  }
 
-  changeDescription = (event) => {
-    this.setState({description: event.target.value});
-  }
+  changeName = event => {
+    this.setState({ name: event.target.value });
+  };
 
-  changeAddress = (event) => {
-    this.setState({address: event.target.value});
-  }
+  changeDescription = event => {
+    this.setState({ description: event.target.value });
+  };
 
-  changeValue = (event) => {
-    this.setState({value: event.target.value});
-  }
+  changeAddress = event => {
+    this.setState({ address: event.target.value });
+  };
 
-  changeSkills = (event) => {
-    this.setState({relevantSkills: event.target.value});
-  }
-  
-  handleSubmit = (event) => {
+  changeValue = event => {
+    this.setState({ value: event.target.value });
+  };
+
+  changeSkills = event => {
+    this.setState({ relevantSkills: event.target.value });
+  };
+
+  handleSubmit = event => {
     event.preventDefault();
     this.props.submit(this.state);
-  }
-  
+  };
+
   render() {
-    const {isOpen, cancel} = this.props;
+    const { isOpen, cancel } = this.props;
     return (
-      <Modal
-        isOpen={isOpen}
-        style={customStyles}
-        contentLabel="Add Request">
-        
-        <form onSubmit={this.handleSubmit}>
-          <label>
+      <Modal isOpen={isOpen} style={customStyles} contentLabel="Add Request">
+        <FormWrapper onSubmit={this.handleSubmit}>
+          <Label>
             Name:
-            <input type="text" value={this.state.name} onChange={this.changeName} />
-          </label>
+            <input
+              type="text"
+              value={this.state.name}
+              onChange={this.changeName}
+            />
+          </Label>
           <label>
             Description:
-            <input type="text" value={this.state.description} onChange={this.changeDescription} />
+            <input
+              type="text"
+              value={this.state.description}
+              onChange={this.changeDescription}
+            />
           </label>
           <label>
             Address:
-            <input type="text" value={this.state.address} onChange={this.changeAddress} />
+            <input
+              type="text"
+              value={this.state.address}
+              onChange={this.changeAddress}
+            />
           </label>
           <label>
             Value:
-            <input type="text" value={this.state.value} onChange={this.changeValue} />
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.changeValue}
+            />
           </label>
           <label>
             Relevant Skills:
-            <input type="text" value={this.state.relevantSkills} onChange={this.changeSkills} />
+            <input
+              type="text"
+              value={this.state.relevantSkills}
+              onChange={this.changeSkills}
+            />
           </label>
-        </form>
+        </FormWrapper>
         <CompleteButton onClick={cancel}>Cancel</CompleteButton>
         <CompleteButton onClick={this.handleSubmit}>Add</CompleteButton>
       </Modal>

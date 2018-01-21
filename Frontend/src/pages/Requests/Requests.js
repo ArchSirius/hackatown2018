@@ -8,7 +8,9 @@ import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
 
-const RequestsBody = styled.div`padding: 0 100px;`;
+const RequestsBody = styled.div`
+  padding: 0 100px;
+`;
 
 const YourRequests = styled.div`
   display: flex;
@@ -39,7 +41,9 @@ const RequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px 5px 15px 5px;
+`;
 
 const ApplicantWrapper = styled.div`
   display: flex;
@@ -51,7 +55,9 @@ const ApplicantWrapper = styled.div`
     color: ${props => props.theme.palette.primary};
   }
 `;
-const ApplicantNames = styled.div`margin: 0 5px;`;
+const ApplicantNames = styled.div`
+  margin: 0 5px;
+`;
 const Applicant = styled.div`
   display: flex;
   flex-basis: 50%;
@@ -82,7 +88,9 @@ const Titles = styled.div`
   margin-bottom: 5px;
   font-weight: 600;
 `;
-const ApplicantTitle = styled.div`flex-basis: 50%;`;
+const ApplicantTitle = styled.div`
+  flex-basis: 50%;
+`;
 const SkillTitle = styled.div`
   flex-basis: 50%;
   text-align: center;
@@ -129,13 +137,17 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CompleteText = styled.span`margin-left: 10px;`;
+const CompleteText = styled.span`
+  margin-left: 10px;
+`;
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const CharityImage = styled.img`height: 15px;`;
+const CharityImage = styled.img`
+  height: 15px;
+`;
 
 const EmptyState = () => (
   <EmptyApplicants>
@@ -152,22 +164,28 @@ class RequestView extends React.Component {
     };
   }
 
-  selectApplicant = id => {
+  selectApplicant = task => {
     console.log('SELECT');
+    this.props.updateTask(task);
+  };
+
+  onCompleteTask = task => {
+    this.props.completeTask(task);
   };
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
-  submit = ({name, description, address, value, relevantSkills}) => {
+  submit = task => {
     // Do something with data
     this.setState({ modalIsOpen: false });
-  }
+    this.props.createTask(task);
+  };
 
   render() {
     const { tasks } = this.props;
@@ -181,7 +199,8 @@ class RequestView extends React.Component {
           <AddRequestModal
             isOpen={this.state.modalIsOpen}
             submit={this.submit}
-            cancel={this.closeModal}/>
+            cancel={this.closeModal}
+          />
         </YourRequests>
 
         <YourRequestCards>
@@ -211,7 +230,7 @@ class RequestView extends React.Component {
                             <ApplicantWrapper
                               key={applicant.id}
                               onClick={() => {
-                                this.selectApplicant(5);
+                                this.selectApplicant(task);
                               }}
                               isChosen={task.chosen === applicant.id}
                             >
@@ -257,7 +276,7 @@ class RequestView extends React.Component {
                   </ApplicantNames>
                   {task.chosen ? (
                     <CompleteButton btnType="primary">
-                      <ButtonContent>
+                      <ButtonContent onClick={() => this.onCompleteTask(task)}>
                         <CharityImage src="/assets/skills/charity.png" alt="" />
                         <CompleteText>Complete your kindness</CompleteText>
                       </ButtonContent>
