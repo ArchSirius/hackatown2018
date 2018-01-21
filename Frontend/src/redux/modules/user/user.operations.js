@@ -9,6 +9,12 @@ export const fetchLoggedInClient = () => dispatch => {
     .catch(err => dispatch(actions.loadProfileFailure(err)));
 };
 
+export const superMagicButton = () => dispatch => {
+  dispatch(actions.magicButton());
+  return userApi.superMagicButton();
+};
+
 export default {
-  fetchLoggedInClient
+  fetchLoggedInClient,
+  superMagicButton
 };

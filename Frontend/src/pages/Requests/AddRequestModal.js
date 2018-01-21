@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import H3 from '../../components/H3';
+import H2 from '../../components/H2';
 import Button from '../../components/Button';
 import Color from 'color';
 import React from 'react';
@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 // https://www.npmjs.com/package/react-modal
 const customStyles = {
   content: {
+    width: '600px',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -30,13 +31,20 @@ const CompleteButton = styled(Button)`
 `;
 
 const FormWrapper = styled.form`
-  max-width: 500px;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
 `;
 
 const Label = styled.label`
+  margin: 5px 0;
   width: 100%;
+`;
+
+const Input = styled.input`
+  height: 25px;
+  min-width: 97%;
+  padding: 5px;
 `;
 
 class AddRequestModal extends React.Component {
@@ -49,6 +57,10 @@ class AddRequestModal extends React.Component {
       value: '',
       relevantSkills: ''
     };
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
   }
 
   changeName = event => {
@@ -80,47 +92,48 @@ class AddRequestModal extends React.Component {
     const { isOpen, cancel } = this.props;
     return (
       <Modal isOpen={isOpen} style={customStyles} contentLabel="Add Request">
+        <H2>Create a Request</H2>
         <FormWrapper onSubmit={this.handleSubmit}>
           <Label>
-            Name:
-            <input
+            Name:<br />
+            <Input
               type="text"
               value={this.state.name}
               onChange={this.changeName}
             />
           </Label>
-          <label>
-            Description:
-            <input
+          <Label>
+            Description: <br />
+            <Input
               type="text"
               value={this.state.description}
               onChange={this.changeDescription}
             />
-          </label>
-          <label>
-            Address:
-            <input
+          </Label>
+          <Label>
+            Address: <br />
+            <Input
               type="text"
               value={this.state.address}
               onChange={this.changeAddress}
             />
-          </label>
-          <label>
-            Value:
-            <input
+          </Label>
+          <Label>
+            Value: <br />
+            <Input
               type="text"
               value={this.state.value}
               onChange={this.changeValue}
             />
-          </label>
-          <label>
-            Relevant Skills:
-            <input
+          </Label>
+          <Label>
+            Relevant Skills: <br />
+            <Input
               type="text"
               value={this.state.relevantSkills}
               onChange={this.changeSkills}
             />
-          </label>
+          </Label>
         </FormWrapper>
         <CompleteButton onClick={cancel}>Cancel</CompleteButton>
         <CompleteButton onClick={this.handleSubmit}>Add</CompleteButton>

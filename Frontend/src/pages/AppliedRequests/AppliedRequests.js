@@ -13,13 +13,16 @@ const YourAppliedRequestCards = styled.div`
 
 const AppliedRequestCard = styled(Pannel)`
   margin: 20px;
-  min-height: 215px;
+  min-height: 250px;
+  max-height: 250px;
   min-width: 450px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const StyledH3 = styled(H3)`
-  margin: 5px 5px 15px 5px;
-`;
+const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -35,9 +38,7 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CardContent = styled.div`
-  margin: 5px;
-`;
+const CardContent = styled.div`margin: 5px;`;
 
 const Status = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ const StatusIcon = styled.div`
 const Address = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 const AddressTitle = styled.span`
   font-weight: 600;
@@ -72,16 +74,11 @@ const SpaceBetween = styled.div`
   padding: 10px 0;
 `;
 
-const DriveMeButton = styled(Button)`
-  max-height: 40px;
-`;
-const DriveMe = styled.span`
-  margin-left: 10px;
-`;
+const DriveMeButton = styled(Button)`max-height: 40px;`;
+const DriveMe = styled.span`margin-left: 10px;`;
 
 class RequestView extends React.Component {
   googleRedirect = address => {
-    console.log('GOOGLE');
     window.open(
       'https://www.google.com/maps/search/?api=1&query=' + address,
       '_blank'
@@ -90,6 +87,7 @@ class RequestView extends React.Component {
 
   render() {
     const { tasks, currentUser } = this.props;
+    console.log(tasks);
     return (
       <div>
         <H2>Your Applied Requests</H2>
@@ -108,18 +106,35 @@ class RequestView extends React.Component {
                     </CarePoints>
                   </CardTitle>
                   <CardContent>
-                    <RequestType>{task.name}</RequestType>
+                    <RequestType>
+                      {task.relevantSkills && task.relevantSkills.length > 0
+                        ? task.relevantSkills.map((category, i) => {
+                            if (task.relevantSkills.length - 1 === i) {
+                              return category;
+                            }
+                            return category + ',';
+                          })
+                        : 'Unknown'}
+                    </RequestType>
                     <Description>{task.description}</Description>
                     <Address>
                       <AddressTitle>Where to go ?</AddressTitle>
                       {task.address}
                     </Address>
                     <SpaceBetween>
-                      <Status>
-                        <StatusIcon isChosen={task.chosen === currentUser._id}>
-                          <i className="fa fa-circle fa-lg" />
-                        </StatusIcon>Waiting for taker decision
-                      </Status>
+                      {task.chosen === currentUser._id ? (
+                        <Status>
+                          <StatusIcon isChosen={true}>
+                            <i className="fa fa-circle fa-lg" />
+                          </StatusIcon>You have been chosen!
+                        </Status>
+                      ) : (
+                        <Status>
+                          <StatusIcon isChosen={false}>
+                            <i className="fa fa-circle fa-lg" />
+                          </StatusIcon>Waiting for decision ...
+                        </Status>
+                      )}
                       <DriveMeButton
                         btnType="primary"
                         onClick={() => this.googleRedirect(task.address)}

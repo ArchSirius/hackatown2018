@@ -16,12 +16,14 @@ class RequestContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  tasks: taskSelectors.getMyTasks(state)
+  tasks: taskSelectors.getMyTasks(state),
+  currentUser: userSelectors.currentUser(state)
 });
 const mapDispatchToProps = dispatch => ({
   fetchTasks: () => dispatch(taskOperations.fetchTasks()),
   fetchUserProfil: () => dispatch(userOperations.fetchLoggedInClient()),
-  updateTask: task => dispatch(taskOperations.updateTask(task)),
+  updateTask: (task, applicant) =>
+    dispatch(taskOperations.updateTaskApplicant(task, applicant)),
   createTask: task => dispatch(taskOperations.createTask(task)),
   completeTask: task => dispatch(taskOperations.updateTaskStatus(task))
 });

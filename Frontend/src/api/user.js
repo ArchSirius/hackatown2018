@@ -5,6 +5,12 @@ export const fetchLoggedInUser = id =>
     method: 'GET'
   }).then(json);
 
+export const superMagicButton = id =>
+  endpointCall(`/demo/reset`, {
+    method: 'POST'
+  });
+
 export default {
-  fetchLoggedInUser
+  fetchLoggedInUser,
+  superMagicButton
 };

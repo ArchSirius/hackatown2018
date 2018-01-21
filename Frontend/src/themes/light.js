@@ -18,7 +18,8 @@ export default {
     border2: 'gainsboro',
     white: 'white',
     black: '#000000',
+    footer: '#333333',
     neutral: '#7f7f7f',
-    link: '#4990e2',
-  },
+    link: '#4990e2'
+  }
 };

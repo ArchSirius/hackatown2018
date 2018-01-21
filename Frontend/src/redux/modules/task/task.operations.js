@@ -25,11 +25,29 @@ export const updateTask = task => dispatch => {
     .catch(err => dispatch(actions.updateTaskFailure(err)));
 };
 
+export const updateTaskApplicant = (task, applicant) => dispatch => {
+  return dispatch(
+    updateTask({
+      ...task,
+      chosen: applicant._id,
+    })
+  );
+};
+
+export const addTaskApplicant = (task, applicant) => dispatch => {
+  return dispatch(
+    updateTask({
+      ...task,
+      applicants: [...task.applicants, applicant],
+    })
+  );
+};
+
 export const updateTaskStatus = task => dispatch => {
   return dispatch(
     updateTask({
       ...task,
-      done: true
+      done: true,
     })
   );
 };
@@ -38,5 +56,7 @@ export default {
   fetchTasks,
   createTask,
   updateTask,
-  updateTaskStatus
+  updateTaskApplicant,
+  addTaskApplicant,
+  updateTaskStatus,
 };

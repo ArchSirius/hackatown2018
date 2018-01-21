@@ -11,9 +11,13 @@ const loadProfileFailure = err => ({
   type: types.LOAD_PROFILE_FAILURE,
   err
 });
+const magicButton = () => ({
+  type: types.MAGIC_BUTTON
+});
 
 export default {
   loadProfile,
   loadProfileSuccess,
-  loadProfileFailure
+  loadProfileFailure,
+  magicButton
 };
