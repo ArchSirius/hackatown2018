@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import Pannel from '../../components/Pannel';
 import Button from '../../components/Button';
+import AppliedRequests from '../AppliedRequests';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
+
+const RequestsBody = styled.div`padding: 0 100px;`;
 
 const YourRequests = styled.div`
   display: flex;
@@ -126,6 +129,14 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
+const CompleteText = styled.span`margin-left: 10px;`;
+const ButtonContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CharityImage = styled.img`height: 15px;`;
+
 const EmptyState = () => (
   <EmptyApplicants>
     <CareImage src="/assets/skills/care.png" alt="" />
@@ -161,8 +172,7 @@ class RequestView extends React.Component {
   render() {
     const { tasks } = this.props;
     return (
-      <div>
-
+      <RequestsBody>
         <YourRequests>
           <H2>Your Requests</H2>
           <AddRequest onClick={this.openModal}>
@@ -190,7 +200,7 @@ class RequestView extends React.Component {
                   <ApplicantNames>
                     {task.applicants && task.applicants.length > 0 ? (
                       <Titles>
-                        <ApplicantTitle>Applicants</ApplicantTitle>
+                        <ApplicantTitle>Choose your giver</ApplicantTitle>
                         <SkillTitle>Skills</SkillTitle>
                       </Titles>
                     ) : null}
@@ -247,15 +257,18 @@ class RequestView extends React.Component {
                   </ApplicantNames>
                   {task.chosen ? (
                     <CompleteButton btnType="primary">
-                      Complete kindness
+                      <ButtonContent>
+                        <CharityImage src="/assets/skills/charity.png" alt="" />
+                        <CompleteText>Complete your kindness</CompleteText>
+                      </ButtonContent>
                     </CompleteButton>
                   ) : null}
                 </RequestCard>
               ))
             : null}
         </YourRequestCards>
-        <H2>Your applied requests</H2>
-      </div>
+        <AppliedRequests />
+      </RequestsBody>
     );
   }
 }

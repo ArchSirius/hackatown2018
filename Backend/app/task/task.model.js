@@ -17,6 +17,7 @@ var TaskSchema = new Schema({
     type: [ String ],
     default: []
   },
+  address: String,
   creator: {
     type: Schema.ObjectId,
     ref: 'User',

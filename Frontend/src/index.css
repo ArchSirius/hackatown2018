@@ -2,8 +2,7 @@
 
 html,
 body {
-  margin: 25px;
-  padding: 0 25px;
+  margin: 0;
   height: 100vh;
   background-color: #eff0f1;
   font-family: 'Roboto', 'Segoe UI', 'Lucida Grande', 'Ubuntu', sans-serif;
