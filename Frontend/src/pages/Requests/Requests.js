@@ -169,8 +169,11 @@ class RequestView extends React.Component {
   };
 
   submit = task => {
+    this.props.createTask({
+      ...task,
+      creator: this.props.currentUser,
+    });
     this.setState({ modalIsOpen: false });
-    this.props.createTask({ ...task, creator: this.props.currentUser._id });
   };
 
   render() {
