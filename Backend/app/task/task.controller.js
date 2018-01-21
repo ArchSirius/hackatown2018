@@ -132,6 +132,11 @@ exports.create = function(req, res) {
       }
     })
     .then(() => Task.create(req.body))
+    .then(task => {
+      task = task.toJSON();
+      task.creator = creator.profile;
+      return task;
+    })
     .then(respondWithResult(res, 201))
     .catch(validationError(res));
 }
