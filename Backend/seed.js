@@ -178,8 +178,7 @@ module.exports = function(override) {
 			"address": "152 Avenue Laurier O, Montréal, QC H2T 2N7",
 			"creator": users[2],
 			"relevantSkills": ['cooking'],
-			"applicants": [users[4], users[5], users[6]],
-			"chosen": users[5]
+			"applicants": [users[4], users[5], users[6]]
 		}, {
 			"name": 'Sewing lessons',
 			"description": 'I would like to learn how to sew. Can you teach me?',
@@ -187,8 +186,7 @@ module.exports = function(override) {
 			"address": "7609 St Hubert St, Montreal, QC H2R 2N7",
 			"creator": users[9],
 			"relevantSkills": ['sewing', 'patience'],
-			"applicants": [users[2], users[1]],
-			"chosen": users[1]
+			"applicants": [users[2], users[1]]
 		}, {
 			"name": 'Show me how to whistle',
 			"description": 'I\'ve been trying for a long time and I need an expert :(',
@@ -204,8 +202,7 @@ module.exports = function(override) {
 			"address": "202 St Zotique, Montréal, QC H2V 4S9",
 			"creator": users[0],
 			"relevantSkills": ['strong'],
-			"applicants": [users[4], users[9], users[6]],
-			"chosen": users[1]
+			"applicants": [users[4], users[9], users[6]]
 		}, {
 			"name": 'Jog with me',
 			"description": 'Jogging is hard to do alone. I need company.',
@@ -219,8 +216,7 @@ module.exports = function(override) {
 			"description": 'Join us to clean local parks :)',
 			"value": 40,
 			"address": "4101 Rue Sherbrooke E, Montréal, QC H1X 2B2",
-			"creator": users[5],
-			"chosen": users[1]
+			"creator": users[5]
 		}, {
 			"name": 'TV setup',
 			"description": 'I bought a new TV but I would like help for the setup.',
@@ -234,8 +230,7 @@ module.exports = function(override) {
 			"value": 0,
 			"address": "2100 Edouard Montpetit Blvd, Montreal, QC H3T 1J4",
 			"creator": users[8],
-			"applicants": [users[1]],
-			"chosen": users[1]
+			"applicants": [users[1]]
 		}, {
 			"name": 'Financial advice',
 			"description": 'I am a total noob in financial stuff and need some help with my taxes.',
