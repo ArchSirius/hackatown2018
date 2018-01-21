@@ -95,8 +95,12 @@ class ExploreRequestsView extends React.Component {
     );
   };
 
+  selectApplicant = (task, applicant) => {
+    this.props.updateTask(task, applicant);
+  };
+
   render() {
-    const { tasks } = this.props;
+    const { tasks, currentUser } = this.props;
     return (
       <RequestsBody>
         <H2>Apply on a request</H2>
@@ -141,7 +145,12 @@ class ExploreRequestsView extends React.Component {
                     </CardContent>
                   </FlexStart>
                   <FlexEnd>
-                    <ApplyButton btnType="primary">
+                    <ApplyButton
+                      btnType="primary"
+                      onClick={() => {
+                        this.selectApplicant(task, currentUser);
+                      }}
+                    >
                       <ButtonContent>
                         <CharityImage src="/assets/skills/charity.png" alt="" />
                         <ApplyText>Apply to give your kindness</ApplyText>

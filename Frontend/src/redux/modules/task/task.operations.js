@@ -34,6 +34,15 @@ export const updateTaskApplicant = (task, applicant) => dispatch => {
   );
 };
 
+export const addTaskApplicant = (task, applicant) => dispatch => {
+  return dispatch(
+    updateTask({
+      ...task,
+      applicants: [...task.applicants, applicant],
+    })
+  );
+};
+
 export const updateTaskStatus = task => dispatch => {
   return dispatch(
     updateTask({
@@ -48,5 +57,6 @@ export default {
   createTask,
   updateTask,
   updateTaskApplicant,
+  addTaskApplicant,
   updateTaskStatus,
 };
