@@ -135,11 +135,23 @@ class AddRequestModal extends React.Component {
       skill => (this.state[skill] ? relevantSkills.push(skill) : null)
     );
     this.props.submit({
-      name: this.state.name,
-      description: this.state.description,
-      address: this.state.address,
-      value: this.state.value,
+      ...this.state,
       relevantSkills
+    });
+    this.setState({
+      name: '',
+      description: '',
+      address: '',
+      value: '',
+      cooking: false,
+      strong: false,
+      carpentry: false,
+      painting: false,
+      plumbing: false,
+      driving: false,
+      writing: false,
+      animalcare: false,
+      cleaning: false
     });
   };
 
@@ -206,11 +218,11 @@ class AddRequestModal extends React.Component {
           />
         </FormWrapper>
         <Buttons>
-          <CompleteButton btnType="primary" onClick={this.handleSubmit}>
-            Submit for kindness
-          </CompleteButton>
           <CompleteButton btnType="primary" onClick={cancel}>
             Cancel
+          </CompleteButton>
+          <CompleteButton btnType="primary" onClick={this.handleSubmit}>
+            Submit for kindness
           </CompleteButton>
         </Buttons>
       </Modal>

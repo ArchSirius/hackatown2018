@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TopBarLinks from './TopBarLinks';
-import { taskOperations, taskSelectors } from '../../redux/modules/task';
+import { taskOperations } from '../../redux/modules/task';
 import { userOperations, userSelectors } from '../../redux/modules/user';
 
 class TopBarLinksContainer extends Component {
@@ -21,9 +21,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchTasks: () => dispatch(taskOperations.fetchTasks()),
-  fetchUserProfil: () => dispatch(userOperations.fetchLoggedInClient()),
+  fetchUserProfil: () => dispatch(userOperations.fetchLoggedInClient())
 });
-
 
 TopBarLinksContainer = connect(mapStateToProps, mapDispatchToProps)(
   TopBarLinksContainer

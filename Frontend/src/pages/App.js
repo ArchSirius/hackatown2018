@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import TopBarLinks from '../pages/TopBarLinks';
