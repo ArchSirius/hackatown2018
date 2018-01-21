@@ -14,10 +14,15 @@ const RequestCards = styled.div`
 const AppliedRequestCard = styled(Pannel)`
   margin: 20px;
   min-height: 215px;
+  max-height: 215px;
   min-width: 450px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`margin: 5px;`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -34,7 +39,12 @@ const CarePointsImage = styled.img`
 `;
 const CharityImage = styled.img`height: 15px;`;
 
-const CardContent = styled.div`margin: 5px;`;
+const CardContent = styled.div`
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const Address = styled.div`
   display: flex;
@@ -43,9 +53,10 @@ const Address = styled.div`
 const AddressTitle = styled.span`
   font-weight: 600;
   padding: 5px 0;
+  margin-top: 5px;
 `;
 
-const Description = styled.p``;
+const Description = styled.span``;
 
 const RequestType = styled.div`
   font-weight: 600;
@@ -64,7 +75,26 @@ const ButtonContent = styled.div`
   align-items: center;
 `;
 
+const FlexStart = styled.div``;
+const FlexEnd = styled.div``;
+
+const AddressDetails = styled.div`
+  display: flex;
+  &:hover {
+    cursor: pointer;
+    color: ${props => props.theme.palette.primary};
+  }
+`;
+const MapIcon = styled.div`padding: 0 10px;`;
+
 class ExploreRequestsView extends React.Component {
+  googleRedirect = address => {
+    window.open(
+      'https://www.google.com/maps/search/?api=1&query=' + address,
+      '_blank'
+    );
+  };
+
   render() {
     const { tasks } = this.props;
     return (
@@ -72,33 +102,52 @@ class ExploreRequestsView extends React.Component {
         <H2>Apply on a request</H2>
         <RequestCards>
           {tasks
-            ? tasks.map(task => (
-                <AppliedRequestCard key={task.id}>
-                  <CardTitle>
-                    <StyledH3>{task.name}</StyledH3>
-                    <CarePoints>
-                      <CarePointsImage
-                        src="/assets/skills/carePoints.png"
-                        alt=""
-                      />1000
-                    </CarePoints>
-                  </CardTitle>
-                  <CardContent>
-                    <RequestType>Painting</RequestType>
-                    <Description>
-                      A task with a beautiful description of it
-                    </Description>
-                    <Address>
-                      <AddressTitle>Where to go ?</AddressTitle>
-                      666 Evil Road, God Villa
-                    </Address>
+            ? tasks.map((task, index) => (
+                <AppliedRequestCard key={index}>
+                  <FlexStart>
+                    <CardTitle>
+                      <StyledH3>{task.name}</StyledH3>
+                      <CarePoints>
+                        <CarePointsImage
+                          src="/assets/skills/carePoints.png"
+                          alt=""
+                        />
+                        {task.value}
+                      </CarePoints>
+                    </CardTitle>
+                    <CardContent>
+                      <RequestType>
+                        {task.relevantSkills && task.relevantSkills.length > 0
+                          ? task.relevantSkills.map((category, i) => {
+                              if (task.relevantSkills.length - 1 === i) {
+                                return category;
+                              }
+                              return category + ',';
+                            })
+                          : 'Unknown'}
+                      </RequestType>
+                      <Description>{task.description}</Description>
+                      <Address>
+                        <AddressTitle>Where to go ?</AddressTitle>
+                        <AddressDetails
+                          onClick={() => this.googleRedirect(task.address)}
+                        >
+                          {task.address}
+                          <MapIcon>
+                            <i className="fa fa-map-marker" />
+                          </MapIcon>
+                        </AddressDetails>
+                      </Address>
+                    </CardContent>
+                  </FlexStart>
+                  <FlexEnd>
                     <ApplyButton btnType="primary">
                       <ButtonContent>
                         <CharityImage src="/assets/skills/charity.png" alt="" />
                         <ApplyText>Apply to give your kindness</ApplyText>
                       </ButtonContent>
                     </ApplyButton>
-                  </CardContent>
+                  </FlexEnd>
                 </AppliedRequestCard>
               ))
             : null}

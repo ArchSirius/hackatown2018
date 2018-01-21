@@ -73,7 +73,6 @@ const DriveMe = styled.span`margin-left: 10px;`;
 
 class RequestView extends React.Component {
   googleRedirect = address => {
-    console.log('GOOGLE');
     window.open(
       'https://www.google.com/maps/search/?api=1&query=' + address,
       '_blank'
