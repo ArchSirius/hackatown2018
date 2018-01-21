@@ -4,14 +4,15 @@ import Button from '../../components/Button';
 import AppliedRequests from '../AppliedRequests';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
-import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
 import skillsConstants from '../../constants/skillsConstants';
 var Tooltip = require('pui-react-tooltip').Tooltip;
 var OverlayTrigger = require('pui-react-overlay-trigger').OverlayTrigger;
 
-const RequestsBody = styled.div`padding: 0 100px;`;
+const RequestsBody = styled.div`
+  padding: 0 100px;
+`;
 
 const YourRequests = styled.div`
   display: flex;
@@ -23,11 +24,7 @@ const AddRequest = styled.div`
   color: ${props => props.theme.palette.primary};
   &:hover {
     cursor: pointer;
-    color: ${props =>
-      Color(props.theme.palette.primary)
-        .fade(0.3)
-        .toString()};
-  }
+    color: ${props => props.theme.palette.primaryDark}
 `;
 
 const YourRequestCards = styled.div`
@@ -42,7 +39,9 @@ const RequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px 5px 15px 5px;
+`;
 
 const ApplicantWrapper = styled.div`
   display: flex;
@@ -54,7 +53,9 @@ const ApplicantWrapper = styled.div`
     color: ${props => props.theme.palette.primary};
   }
 `;
-const ApplicantNames = styled.div`margin: 0 5px;`;
+const ApplicantNames = styled.div`
+  margin: 0 5px;
+`;
 const Applicant = styled.div`
   display: flex;
   flex-basis: 50%;
@@ -85,7 +86,9 @@ const Titles = styled.div`
   margin-bottom: 5px;
   font-weight: 600;
 `;
-const ApplicantTitle = styled.div`flex-basis: 50%;`;
+const ApplicantTitle = styled.div`
+  flex-basis: 50%;
+`;
 const SkillTitle = styled.div`
   flex-basis: 50%;
   text-align: center;
@@ -133,13 +136,17 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CompleteText = styled.span`margin-left: 10px;`;
+const CompleteText = styled.span`
+  margin-left: 10px;
+`;
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const CharityImage = styled.img`height: 15px;`;
+const CharityImage = styled.img`
+  height: 15px;
+`;
 
 const EmptyState = () => (
   <EmptyApplicants>
@@ -152,7 +159,7 @@ class RequestView extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalIsOpen: false,
+      modalIsOpen: false
     };
   }
 
@@ -173,8 +180,11 @@ class RequestView extends React.Component {
   };
 
   submit = task => {
+    this.props.createTask({
+      ...task,
+      creator: this.props.currentUser
+    });
     this.setState({ modalIsOpen: false });
-    this.props.createTask({ ...task, creator: this.props.currentUser._id });
   };
 
   render() {
@@ -240,6 +250,7 @@ class RequestView extends React.Component {
                                 {applicant.skills
                                   ? applicant.skills.map((skill, index) => (
                                       <OverlayTrigger
+                                        key={index}
                                         placement="bottom"
                                         overlay={
                                           <Tooltip>

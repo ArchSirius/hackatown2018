@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import H2 from '../../components/H2';
 import Button from '../../components/Button';
-import Color from 'color';
+import NumberPicker from '../../components/NumberPicker';
+import skillsConstants from '../../constants/skillsConstants';
+import { skillsToShow } from '../../constants/skillsConstants';
 import React from 'react';
 import Modal from 'react-modal';
+var Tooltip = require('pui-react-tooltip').Tooltip;
+var OverlayTrigger = require('pui-react-overlay-trigger').OverlayTrigger;
 
 // https://www.npmjs.com/package/react-modal
 const customStyles = {
@@ -23,11 +27,7 @@ const CompleteButton = styled(Button)`
   background-color: ${props => props.theme.palette.primary};
   &:hover {
     cursor: pointer;
-    background-color: ${props =>
-      Color(props.theme.palette.primary)
-        .fade(0.3)
-        .toString()};
-  }
+    background-color: ${props => props.theme.palette.primaryDark}
 `;
 
 const FormWrapper = styled.form`
@@ -36,15 +36,52 @@ const FormWrapper = styled.form`
   flex-direction: column;
 `;
 
-const Label = styled.label`
-  margin: 5px 0;
+const Input = styled.input`
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  outline: none;
+  appearance: none;
+  background-color: transparent;
+  border: 1.5px solid ${props => props.theme.palette.border};
+  border-radius: 3px;
+  font-size: 16px;
+  transition: border 0.25s ease-in-out;
+  &:focus {
+    border-color: ${props => props.theme.palette.primary};
+    outline: 0;
+    box-shadow: none;
+  }
+`;
+
+const StyledNumberPicker = styled(NumberPicker)`
+  margin-bottom: 10px;
+`;
+
+const StyledLabel = styled.label`
+  font-weight: 600;
+  margin: 15px 0 5px 0;
   width: 100%;
 `;
 
-const Input = styled.input`
+const Buttons = styled.div`
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Skills = styled.div`
+  display: flex;
+`;
+const Skill = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+`;
+const SkillImage = styled.img`
+  margin: 5px;
   height: 25px;
-  min-width: 97%;
-  padding: 5px;
 `;
 
 class AddRequestModal extends React.Component {
@@ -55,7 +92,15 @@ class AddRequestModal extends React.Component {
       description: '',
       address: '',
       value: '',
-      relevantSkills: ''
+      cooking: false,
+      strong: false,
+      carpentry: false,
+      painting: false,
+      plumbing: false,
+      driving: false,
+      writing: false,
+      animalcare: false,
+      cleaning: false
     };
   }
 
@@ -75,8 +120,8 @@ class AddRequestModal extends React.Component {
     this.setState({ address: event.target.value });
   };
 
-  changeValue = event => {
-    this.setState({ value: event.target.value });
+  changeValue = newValue => {
+    this.setState({ value: newValue });
   };
 
   changeSkills = event => {
@@ -85,7 +130,21 @@ class AddRequestModal extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.submit(this.state);
+    let relevantSkills = [];
+    skillsToShow.map(
+      skill => (this.state[skill] ? relevantSkills.push(skill) : null)
+    );
+    this.props.submit({
+      name: this.state.name,
+      description: this.state.description,
+      address: this.state.address,
+      value: this.state.value,
+      relevantSkills
+    });
+  };
+
+  toggleSkill = skill => {
+    this.setState({ [skill]: !this.state[skill] });
   };
 
   render() {
@@ -94,49 +153,66 @@ class AddRequestModal extends React.Component {
       <Modal isOpen={isOpen} style={customStyles} contentLabel="Add Request">
         <H2>Create a Request</H2>
         <FormWrapper onSubmit={this.handleSubmit}>
-          <Label>
-            Name:<br />
-            <Input
-              type="text"
-              value={this.state.name}
-              onChange={this.changeName}
-            />
-          </Label>
-          <Label>
-            Description: <br />
-            <Input
-              type="text"
-              value={this.state.description}
-              onChange={this.changeDescription}
-            />
-          </Label>
-          <Label>
-            Address: <br />
-            <Input
-              type="text"
-              value={this.state.address}
-              onChange={this.changeAddress}
-            />
-          </Label>
-          <Label>
-            Value: <br />
-            <Input
-              type="text"
-              value={this.state.value}
-              onChange={this.changeValue}
-            />
-          </Label>
-          <Label>
-            Relevant Skills: <br />
-            <Input
-              type="text"
-              value={this.state.relevantSkills}
-              onChange={this.changeSkills}
-            />
-          </Label>
+          <StyledLabel>Name</StyledLabel>
+          <Input
+            type="text"
+            value={this.state.name}
+            onChange={this.changeName}
+          />
+          <StyledLabel>Description</StyledLabel>
+          <Input
+            type="text"
+            value={this.state.description}
+            onChange={this.changeDescription}
+          />
+          <StyledLabel>Address</StyledLabel>
+          <Input
+            type="text"
+            value={this.state.address}
+            onChange={this.changeAddress}
+          />
+          <StyledLabel>Relevant Skills</StyledLabel>
+          <Skills>
+            {skillsToShow.map((skill, index) => (
+              <OverlayTrigger
+                key={index}
+                placement="bottom"
+                overlay={<Tooltip>{skillsConstants[skill].tooltip}</Tooltip>}
+              >
+                <Skill
+                  key={index}
+                  className="overlay-trigger"
+                  tabIndex="0"
+                  onClick={() => this.toggleSkill(skill)}
+                >
+                  {!this.state[skill] ? (
+                    <SkillImage src={skillsConstants[skill].iconPath} alt="" />
+                  ) : (
+                    <SkillImage
+                      src={skillsConstants[skill].selIconPath}
+                      alt=""
+                    />
+                  )}
+                </Skill>
+              </OverlayTrigger>
+            ))}
+          </Skills>
+          <StyledLabel>Care Points</StyledLabel>
+          <StyledNumberPicker
+            input={{
+              value: this.state.value ? this.state.value : 0,
+              onChange: this.changeValue
+            }}
+          />
         </FormWrapper>
-        <CompleteButton onClick={cancel}>Cancel</CompleteButton>
-        <CompleteButton onClick={this.handleSubmit}>Add</CompleteButton>
+        <Buttons>
+          <CompleteButton btnType="primary" onClick={this.handleSubmit}>
+            Submit for kindness
+          </CompleteButton>
+          <CompleteButton btnType="primary" onClick={cancel}>
+            Cancel
+          </CompleteButton>
+        </Buttons>
       </Modal>
     );
   }

@@ -22,7 +22,9 @@ const AppliedRequestCard = styled(Pannel)`
   justify-content: space-between;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px 5px 15px 5px;
+`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -38,7 +40,9 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CardContent = styled.div`margin: 5px;`;
+const CardContent = styled.div`
+  margin: 5px;
+`;
 
 const Status = styled.div`
   display: flex;
@@ -74,8 +78,12 @@ const SpaceBetween = styled.div`
   padding: 10px 0;
 `;
 
-const DriveMeButton = styled(Button)`max-height: 40px;`;
-const DriveMe = styled.span`margin-left: 10px;`;
+const DriveMeButton = styled(Button)`
+  max-height: 40px;
+`;
+const DriveMe = styled.span`
+  margin-left: 10px;
+`;
 
 class RequestView extends React.Component {
   googleRedirect = address => {

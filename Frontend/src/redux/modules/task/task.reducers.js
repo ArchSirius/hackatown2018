@@ -21,15 +21,6 @@ const byId = (state = null, action) => {
   }
 };
 
-const error = (state = null, action) => {
-  switch (action.type) {
-    case types.FETCH_TASKS_FAILURE:
-      return 'not enought care point available!';
-    default:
-      return state;
-  }
-};
-
 export default combineReducers({
   byId
 });

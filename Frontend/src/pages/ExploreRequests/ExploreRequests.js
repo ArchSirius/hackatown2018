@@ -13,16 +13,18 @@ const RequestCards = styled.div`
 
 const AppliedRequestCard = styled(Pannel)`
   margin: 20px;
-  min-height: 215px;
-  max-height: 215px;
-  min-width: 450px;
-  max-width: 450px;
+  min-height: 255px;
+  max-height: 255px;
+  min-width: 470px;
+  max-width: 470px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px;
+`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -37,7 +39,9 @@ const CarePointsImage = styled.img`
   margin: 5px;
   height: 25px;
 `;
-const CharityImage = styled.img`height: 15px;`;
+const CharityImage = styled.img`
+  height: 15px;
+`;
 
 const CardContent = styled.div`
   margin: 5px;
@@ -67,8 +71,12 @@ const ApplyButton = styled(Button)`
   margin-top: 10px;
   width: 100%;
 `;
-const ApplyText = styled.span`margin-left: 10px;`;
-const RequestsBody = styled.div`padding: 0 100px;`;
+const ApplyText = styled.span`
+  margin-left: 10px;
+`;
+const RequestsBody = styled.div`
+  padding: 0 100px;
+`;
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
@@ -85,7 +93,9 @@ const AddressDetails = styled.div`
     color: ${props => props.theme.palette.primary};
   }
 `;
-const MapIcon = styled.div`padding: 0 10px;`;
+const MapIcon = styled.div`
+  padding: 0 10px;
+`;
 
 class ExploreRequestsView extends React.Component {
   googleRedirect = address => {

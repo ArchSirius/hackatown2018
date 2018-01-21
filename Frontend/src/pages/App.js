@@ -5,9 +5,16 @@ import Footer from '../components/Footer';
 import TopBarLinks from '../pages/TopBarLinks';
 
 const App = ({ children }) => (
-  <div style={{ minWidth: '980px' }}>
+  <div
+    style={{
+      minWidth: '980px',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}
+  >
     <TopBar links={<TopBarLinks />} />
-    <div>{children}</div>
+    <div style={{ flex: 1 }}>{children}</div>
     <Footer />
   </div>
 );

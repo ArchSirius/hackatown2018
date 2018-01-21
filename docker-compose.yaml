@@ -3,6 +3,7 @@ version: '3'
 networks:
   front:
   back:
+  db:
   web:
 
 services:
@@ -36,10 +37,23 @@ services:
     image: mongo
     networks:
       - back
+      - db
     restart: always
     volumes:
       - configdb:/data/configdb
       - db:/data/db
+
+  admin:
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: "admin"
+      ME_CONFIG_BASICAUTH_PASSWORD: "b0UvYiBRpc7rm3nYBN5efDwHJOj3d3xO"
+    image: mongo-express:latest
+    links:
+      - db:mongo
+    networks:
+      - db
+    ports:
+      - "8081:8081"
 
   nginx:
     image: nginx
