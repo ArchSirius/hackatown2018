@@ -7,6 +7,7 @@ import H3 from '../../components/H3';
 import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
+import skillsConstants from '../../constants/skillsConstants';
 
 const RequestsBody = styled.div`
   padding: 0 100px;
@@ -182,13 +183,13 @@ class RequestView extends React.Component {
   };
 
   submit = task => {
-    // Do something with data
     this.setState({ modalIsOpen: false });
     this.props.createTask(task);
   };
 
   render() {
     const { tasks } = this.props;
+    console.log(tasks);
     return (
       <RequestsBody>
         <YourRequests>
@@ -206,14 +207,15 @@ class RequestView extends React.Component {
         <YourRequestCards>
           {tasks
             ? tasks.map((task, index) => (
-                <RequestCard key={task.id}>
+                <RequestCard key={index}>
                   <CardTitle>
                     <StyledH3>{task.name}</StyledH3>
                     <CarePoints>
                       <CarePointsImage
                         src="/assets/skills/carePoints.png"
                         alt=""
-                      />1000
+                      />
+                      {task.value}
                     </CarePoints>
                   </CardTitle>
                   <ApplicantNames>
@@ -225,47 +227,41 @@ class RequestView extends React.Component {
                     ) : null}
                     {task.applicants && task.applicants.length > 0 ? (
                       task.applicants.map(
-                        applicant =>
-                          task.chosen === applicant.id || !task.chosen ? (
+                        (applicant, index) =>
+                          task.chosen === applicant._id || !task.chosen ? (
                             <ApplicantWrapper
-                              key={applicant.id}
+                              key={index}
                               onClick={() => {
                                 this.selectApplicant(task);
                               }}
-                              isChosen={task.chosen === applicant.id}
+                              isChosen={task.hasOwnProperty('chosen')}
                             >
                               <Applicant>
                                 <Icon>
-                                  {task.chosen === applicant.id ? (
+                                  {task.hasOwnProperty('chosen') ? (
                                     <i className="fa fa-check" />
                                   ) : (
                                     <i className="fa fa-circle-o" />
                                   )}
                                 </Icon>
-                                <span>Bob Gratton</span>
+                                <span>{applicant.username}</span>
                               </Applicant>
                               <Skills>
-                                <Skill>
-                                  <Points>100</Points>
-                                  <SkillImage
-                                    src="/assets/skills/carpenter.png"
-                                    alt=""
-                                  />
-                                </Skill>
-                                <Skill>
-                                  <Points>10</Points>
-                                  <SkillImage
-                                    src="/assets/skills/cooker.png"
-                                    alt=""
-                                  />
-                                </Skill>
-                                <Skill>
-                                  <Points>10</Points>
-                                  <SkillImage
-                                    src="/assets/skills/painter.png"
-                                    alt=""
-                                  />
-                                </Skill>
+                                {applicant.skills
+                                  ? applicant.skills.map((skill, index) => (
+                                      <Skill key={index}>
+                                        <Points>{skill.value}</Points>
+                                        <SkillImage
+                                          src={
+                                            skillsConstants[
+                                              skill.name.replace(/\s+/g, '')
+                                            ].iconPath
+                                          }
+                                          alt=""
+                                        />
+                                      </Skill>
+                                    ))
+                                  : null}
                               </Skills>
                             </ApplicantWrapper>
                           ) : null

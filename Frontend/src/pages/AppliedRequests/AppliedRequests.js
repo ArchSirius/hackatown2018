@@ -95,8 +95,8 @@ class RequestView extends React.Component {
         <H2>Your Applied Requests</H2>
         <YourAppliedRequestCards>
           {tasks
-            ? tasks.map(task => (
-                <AppliedRequestCard key={task.id}>
+            ? tasks.map((task, index) => (
+                <AppliedRequestCard key={index}>
                   <CardTitle>
                     <StyledH3>{task.name}</StyledH3>
                     <CarePoints>
