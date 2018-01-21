@@ -1,4 +1,5 @@
 var express     = require('express');
+var cors        = require('cors');
 var http        = require('http');
 var app         = express();
 var bodyParser  = require('body-parser');
@@ -14,6 +15,8 @@ mongoose.connect(config.mongo.uri, { useMongoClient: true });
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+
+app.use(cors());
 
 require('./routes.js')(app);
 

@@ -1,9 +1,11 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/demo              ->  getDemoUser
+ * GET     /api/demo/user         ->  getDemoUser
+ * POST    /api/demo/reset        ->  resetDatabase
  */
 
 var User = require('../user/user.model');
+var seed = require('../../seed');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -44,4 +46,16 @@ exports.getDemoUser = function(req, res) {
     })
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+/**
+ * Reset the database
+ */
+exports.resetDatabase = function(req, res) {
+  return seed(true)
+  .then(() => {
+    return {};
+  })
+  .then(respondWithResult(res, 204))
+  .catch(handleError(res));
 }

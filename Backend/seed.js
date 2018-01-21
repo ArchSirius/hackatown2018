@@ -1,10 +1,10 @@
 var Task = require('./app/task/task.model');
 var User = require('./app/user/user.model');
 
-module.exports = function() {
-	if(process.env.SEED) {
+module.exports = function(override) {
+	if(process.env.SEED || override) {
 		// Clear tasks
-		Task.remove({})
+		return Task.remove({})
 		.then(() => {
 			console.log('Tasks cleared');
 		})
@@ -132,7 +132,7 @@ module.exports = function() {
 			"username": "Patrick Williams",
 			"email": "patrick@example.com",
 			"password": "foobarbaz",
-			"points": 25,
+			"points": 50,
 			"skills": [{
 				"name": "cleaning",
 				"value": "4"
@@ -216,7 +216,6 @@ module.exports = function() {
 			"creator": users[0],
 			"relevantSkills": ['physical'],
 			"applicants": [users[1], users[9]],
-			"chosen": users[1],
 			"done": true
 		}, {
 			"name": 'Park cleaning',
