@@ -7,22 +7,20 @@ _Get all active tasks_
 
 **Return**:
 ```
-{
-  "tasks": [
-    {
-      "_id": UUID,
-      "name": String,
-      "description": String,
-      "value": Integer,
-      "relevantSkills": [ String, String, ... ],
-      "creator": UUID,
-      "applicants": [ UUID, UUID, ... ],
-      "chosen": UUID,
-      "done": Boolean
-    },
-    ...
-  ]
-}
+[
+  {
+    "_id": UUID,
+    "name": String,
+    "description": String,
+    "value": Integer,
+    "relevantSkills": [ String, String, ... ],
+    "creator": UUID,
+    "applicants": [ UUID, UUID, ... ],
+    "chosen": UUID,
+    "done": Boolean
+  },
+  ...
+]
 ```
 
 ### `POST api/tasks`
@@ -60,7 +58,6 @@ _Apply on a task or choose an applicant_
 **Body**:
 ```
 {
-  "_id": UUID,
   "name": String,
   "description": String,
   "value": Integer,

@@ -9,6 +9,7 @@
 
 var _    = require('lodash');
 var Task = require('./task.model');
+var User = require('../user/user.model');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -38,6 +39,31 @@ function removeEntity(res) {
         });
     }
   };
+}
+
+/**
+ * Transfer points from creator to chosen if task was just finished
+ */
+function transferPoints(req) {
+  return function(task) {
+    if(!task.done && req.body.done) {
+      if (!task.chosen) {
+        throw "Can't complete a task without a chosen applicant.";
+      }
+      User.findById(task.creator).exec()
+      .then(creator => {
+        creator.points -= task.value;
+        task.creator.points = creator.points;
+        return creator.save();
+      })
+      .then(() => User.findById(task.chosen))
+      .then(chosen => {
+        chosen.points += task.value;
+        return chosen.save();
+      });
+    }
+    return task;
+  }
 }
 
 function handleEntityNotFound(res) {
@@ -139,6 +165,7 @@ exports.update = function(req, res) {
       select: 'username skills'
     }).exec()
     .then(handleEntityNotFound(res))
+    .then(transferPoints(req))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(validationError(res));
