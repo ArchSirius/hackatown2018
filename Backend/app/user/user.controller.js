@@ -9,8 +9,6 @@
  * PUT     /api/users/:id/password ->  password
  */
 
-'use strict';
-
 var _    = require('lodash');
 var User = require('./user.model');
 var auth = require('../../auth/auth.service')
@@ -111,7 +109,10 @@ exports.show = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(user => {
       if (user) {
-        user = user.profile
+        const points = user.points;
+        user = user.profile;
+        // Add points
+        user.points = points;
       }
       return user;
     })
@@ -122,7 +123,6 @@ exports.show = function(req, res) {
 /**
  * Deletes a user
  * restriction: authenticated
- * restriction: self
  */
 exports.destroy = function(req, res) {
   return User.findById(req.params.id, '-salt -password').exec()
@@ -134,7 +134,6 @@ exports.destroy = function(req, res) {
 /**
  * Change a users password
  * restriction: authenticated
- * restriction: self
  */
 exports.changePassword = function(req, res) {
   var oldPass = String(req.body.oldPassword);

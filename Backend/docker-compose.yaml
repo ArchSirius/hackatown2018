@@ -6,6 +6,7 @@ services:
     environment:
       MONGODB_URI: "mongodb://db/hackatown2018"
       SECRET: "hwhk7lumNzVTldE9dNRblx0r1e5YFyjq"
+      SEED: "true"
     links:
       - db
     ports:

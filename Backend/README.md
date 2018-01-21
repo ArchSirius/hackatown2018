@@ -7,22 +7,20 @@ _Get all active tasks_
 
 **Return**:
 ```
-{
-  "tasks": [
-    {
-      "id": UUID,
-      "name": String,
-      "category": String,
-      "description": String,
-      "carepoints": Integer,
-      "creator": UUID,
-      "applicants": [ UUID, UUID, ... ],
-      "chosen": UUID or undefined,
-      "status": "created", "pending" or "done"
-    },
-    ...
-  ]
-}
+[
+  {
+    "_id": UUID,
+    "name": String,
+    "description": String,
+    "value": Integer,
+    "relevantSkills": [ String, String, ... ],
+    "creator": UUID,
+    "applicants": [ UUID, UUID, ... ],
+    "chosen": UUID,
+    "done": Boolean
+  },
+  ...
+]
 ```
 
 ### `POST api/tasks`
@@ -32,9 +30,9 @@ _Create a new task_
 ```
 {
   "name": String,
-  "category": String,
   "description": String,
-  "carepoints": Integer,
+  "value": Integer,
+  "relevantSkills": [ String, String, ... ],
   "creator": UUID
 }
 ```
@@ -42,7 +40,15 @@ _Create a new task_
 **Return**:
 ```
 {
-  "id": UUID
+  "_id": UUID,
+  "name": String,
+  "description": String,
+  "value": Integer,
+  "relevantSkills": [ String, String, ... ],
+  "creator": UUID,
+  "applicants": [ UUID, UUID, ... ],
+  "chosen": UUID,
+  "done": Boolean
 }
 ```
 
@@ -52,19 +58,31 @@ _Apply on a task or choose an applicant_
 **Body**:
 ```
 {
-  "id": UUID,
   "name": String,
-  "category": String,
   "description": String,
-  "carepoints": Integer,
+  "value": Integer,
+  "relevantSkills": [ String, String, ... ],
   "creator": UUID,
   "applicants": [ UUID, UUID, ... ],
-  "chosen": UUID or undefined,
-  "status": "created", "pending" or "done"
+  "chosen": UUID,
+  "done": Boolean
 }
 ```
 
-**Return**: Nothing
+**Return**: 
+```
+{
+  "_id": UUID,
+  "name": String,
+  "description": String,
+  "value": Integer,
+  "relevantSkills": [ String, String, ... ],
+  "creator": UUID,
+  "applicants": [ UUID, UUID, ... ],
+  "chosen": UUID,
+  "done": Boolean
+}
+```
 
 ### `PATCH api/tasks/:id`
 _Change task status_
@@ -72,8 +90,7 @@ _Change task status_
 **Body**:
 ```
 {
-  "id": UUID,
-  "status": "created", "pending" or "done"
+  "done": Boolean
 }
 ```
 
@@ -81,20 +98,20 @@ _Change task status_
 ```
 {
   "task": {
-    "id": UUID,
+     "_id": UUID,
     "name": String,
-    "category": String,
     "description": String,
-    "carepoints": Integer,
+    "value": Integer,
+    "relevantSkills": [ String, String, ... ],
     "creator": UUID,
     "applicants": [ UUID, UUID, ... ],
-    "chosen": UUID or undefined,
-    "status": "created", "pending" or "done"
+    "chosen": UUID,
+    "done": Boolean
   },
-  "creator": {
-    "id": UUID,
-    "name": String,
-    "carepoints": Integer,
+  "user": {
+    "_id": UUID,
+    "username": String,
+    "points": Integer,
     "skills": [ 
       {
         "name": String,
@@ -103,18 +120,6 @@ _Change task status_
       ... 
     ]
   },
-  "chosen": {
-    "id": UUID,
-    "name": String,
-    "carepoints": Integer,
-    "skills": [ 
-      {
-        "name": String,
-        "value": Integer
-      }, 
-      ... 
-    ]
-  }
 }
 ```
 
@@ -126,9 +131,9 @@ _Get specific user_
 **Return**:
 ```
 {
-  "id": UUID,
-  "name": String,
-  "carepoints": Integer,
+  "_id": UUID,
+  "username": String,
+  "points": Integer,
   "skills": [ 
     {
       "name": String,

@@ -1,5 +1,3 @@
-'use strict';
-
 var crypto       = require('crypto');
 var mongoose     = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -19,7 +17,26 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  salt: String
+  salt: String,
+  points: {
+    type: Number,
+    default: 0
+  },
+  skills: {
+    type: [{
+      name: {
+        type: String,
+        required: true
+      },
+      value: {
+        type: Number,
+        min: 0,
+        default: 0
+      },
+      _id : false
+    }],
+    default: []
+  }
 });
 
 /**
@@ -33,7 +50,7 @@ UserSchema
     return {
       '_id': this._id,
       'username': this.username,
-      'name': this.name
+      'skills': this.skills
     };
   });
 
