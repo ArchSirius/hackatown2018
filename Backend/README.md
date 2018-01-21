@@ -1,12 +1,12 @@
 ## Routes specifications
 
-- [GET api/tasks](#get-api/tasks)
-- [POST api/tasks](#post-api/tasks)
-- [PUT api/tasks/:id](#put-api/tasks/:id)
-- [GET api/users/:id](#get-api/users/:id)
+- [GET api/tasks](#get-all-active-tasks)
+- [POST api/tasks](#create-a-new-task)
+- [PUT api/tasks/:id](#update-a-task)
+- [GET api/users/:id](#get-specific-user)
 
-#### `GET api/tasks`
-_Get all active tasks_
+#### Get all active tasks
+`GET api/tasks`
 
 **Body**: Nothing
 
@@ -43,8 +43,8 @@ _Get all active tasks_
 ]
 ```
 
-#### `POST api/tasks`
-_Create a new task_
+#### Create a new task
+`POST api/tasks`
 
 **Body**:
 ```
@@ -88,8 +88,8 @@ _Create a new task_
 }
 ```
 
-#### `PUT api/tasks/:id`
-_Apply on a task, choose an applicant or mark a task as done_
+#### Update a task
+`PUT api/tasks/:id`
 - _To apply on a task, append a user to applicants;_
 - _To choose an applicant, set the chosen field to a valid user id;_
 - _To mark a task as done, set the done field to true._
@@ -154,8 +154,8 @@ _Apply on a task, choose an applicant or mark a task as done_
 }
 ```
 
-#### `GET api/users/:id`
-_Get specific user_
+#### Get specific user
+`GET api/users/:id`
 
 **Body**: Nothing
 
