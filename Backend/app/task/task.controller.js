@@ -47,8 +47,8 @@ function removeEntity(res) {
 function transferPoints(req) {
   return function(task) {
     if(!task.done && req.body.done) {
-      if (!task.chosen) {
-        throw "Can't complete a task without a chosen applicant.";
+      if(!task.chosen) {
+        throw 'Can\'t complete a task without a chosen applicant.';
       }
       User.findById(task.creator).exec()
       .then(creator => {
@@ -114,7 +114,24 @@ exports.index = function(req, res) {
  * Creates a new task
  */
 exports.create = function(req, res) {
-  return Task.create(req.body)
+  var creatorId = req.body.creator;
+  var creator;
+  User.findById(creatorId)
+    .then(user => {
+      creator = user;
+    })
+    .then(() => Task.find({ creator: creatorId }))
+    .then(tasks => {
+      var activePoints = 0;
+      tasks.forEach(task => {
+        activePoints += task.value;
+      });
+      var remainingPoints = creator.points - activePoints;
+      if(remainingPoints < req.body.value) {
+        throw 'Insufficient points balance!';
+      }
+    })
+    .then(() => Task.create(req.body))
     .then(respondWithResult(res, 201))
     .catch(validationError(res));
 }
