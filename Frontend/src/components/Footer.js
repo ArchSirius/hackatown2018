@@ -12,12 +12,6 @@ const FooterWrapper = styled.div`
   align-items: center;
 `;
 
-const Links = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-`;
-
 const SuperPowerBtn = styled.span`
   color: #393939;
   font-size: 14px;

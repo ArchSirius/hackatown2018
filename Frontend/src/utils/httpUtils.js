@@ -1,14 +1,6 @@
 const API_URL = 'http://api.caremmunity.archsirius.com/api';
 const ENDPOINT_PREFIX = `${API_URL}`;
 
-const queryParams = params =>
-  Object.keys(params)
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-    .join('&');
-
-const extendUrl = (url, params) =>
-  params ? `${url}?${queryParams(params)}` : url;
-
 const status = res => {
   if (res.status >= 200 && res.status < 300) {
     return Promise.resolve(res);
