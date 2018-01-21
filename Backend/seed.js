@@ -188,8 +188,7 @@ module.exports = function(override) {
 			"creator": users[9],
 			"relevantSkills": ['sewing', 'patience'],
 			"applicants": [users[2], users[1]],
-			"chosen": users[1],
-			"done": true
+			"chosen": users[1]
 		}, {
 			"name": 'Show me how to whistle',
 			"description": 'I\'ve been trying for a long time and I need an expert :(',
@@ -197,8 +196,7 @@ module.exports = function(override) {
 			"address": "2900 Edouard Montpetit Blvd, Montreal, QC H3T 1J4",
 			"creator": users[1],
 			"applicants": [users[9], users[7]],
-			"chosen": users[9],
-			"done": true
+			"chosen": users[9]
 		}, {
 			"name": 'Moving furniture',
 			"description": 'I\'m moving out and my back is killing me. I need your muscles.',
@@ -215,8 +213,7 @@ module.exports = function(override) {
 			"address": "5100 Sherbrooke St E, Montreal, QC H1V 3R9",
 			"creator": users[0],
 			"relevantSkills": ['physical'],
-			"applicants": [users[1], users[9]],
-			"done": true
+			"applicants": [users[1], users[9]]
 		}, {
 			"name": 'Park cleaning',
 			"description": 'Join us to clean local parks :)',
@@ -238,8 +235,7 @@ module.exports = function(override) {
 			"address": "2100 Edouard Montpetit Blvd, Montreal, QC H3T 1J4",
 			"creator": users[8],
 			"applicants": [users[1]],
-			"chosen": users[1],
-			"done": true
+			"chosen": users[1]
 		}, {
 			"name": 'Financial advice',
 			"description": 'I am a total noob in financial stuff and need some help with my taxes.',
