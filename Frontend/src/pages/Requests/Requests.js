@@ -5,6 +5,7 @@ import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Color from 'color';
 import React from 'react';
+import AddRequestModal from './AddRequestModal';
 
 const YourRequests = styled.div`
   display: flex;
@@ -133,18 +134,44 @@ const EmptyState = () => (
 );
 
 class RequestView extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modalIsOpen: false
+    };
+  }
+
   selectApplicant = id => {
     console.log('SELECT');
   };
+
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  }
+
+  submit = ({name, description, address, value, relevantSkills}) => {
+    // Do something with data
+    this.setState({ modalIsOpen: false });
+  }
+
   render() {
     const { tasks } = this.props;
     return (
       <div>
+
         <YourRequests>
           <H2>Your Requests</H2>
-          <AddRequest>
+          <AddRequest onClick={this.openModal}>
             <i className="fa fa-plus-circle fa-2x" />
           </AddRequest>
+          <AddRequestModal
+            isOpen={this.state.modalIsOpen}
+            submit={this.submit}
+            cancel={this.closeModal}/>
         </YourRequests>
 
         <YourRequestCards>
