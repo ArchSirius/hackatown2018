@@ -1,5 +1,5 @@
-const API_URL = '';
-const ENDPOINT_PREFIX = `${API_URL}/v1`;
+const API_URL = 'http://caremmunity.archsirius.com/api';
+const ENDPOINT_PREFIX = `${API_URL}`;
 
 const queryParams = params =>
   Object.keys(params)
@@ -14,7 +14,7 @@ const status = res => {
     return Promise.resolve(res);
   } else {
     if (res.status === 401 || res.status === 403) {
-      this.context.router.transitionTo('/login');
+      console.log('ERROR HAPPEND');
     }
     return res.json().then(res => Promise.reject(res));
   }
