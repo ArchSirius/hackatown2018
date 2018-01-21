@@ -21,19 +21,18 @@ export const getAppliedTasks = state =>
       )
     : [];
 
-export const getUnassignedTask = state =>
-  state.task.byId
+export const getUnassignedTask = state => {
+  return state.task.byId
     ? Object.values(state.task.byId)
         .filter(task => task.creator._id !== state.user.currentUser._id)
-        .filter(task =>
-          task.applicants.some(user => user._id !== state.user.currentUser._id)
-        )
+        .filter(task => task.applicants.includes(state.user.currentUser))
     : [];
+};
 
 export default {
   getById,
   getAllTasks,
   getMyTasks,
   getAppliedTasks,
-  getUnassignedTask
+  getUnassignedTask,
 };
