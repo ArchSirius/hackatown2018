@@ -1,4 +1,4 @@
-const API_URL = 'http://caremmunity.archsirius.com/api';
+const API_URL = 'http://api.caremmunity.archsirius.com/api';
 const ENDPOINT_PREFIX = `${API_URL}`;
 
 const queryParams = params =>
