@@ -35,7 +35,7 @@ const RequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px;`;
+const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
 
 const ApplicantWrapper = styled.div`
   display: flex;
@@ -111,6 +111,20 @@ const WaitingText = styled.span`
   color: ${props => props.theme.palette.primary};
 `;
 
+const CardTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const CarePoints = styled.div`
+  margin: 5px;
+  display: flex;
+  align-items: center;
+`;
+const CarePointsImage = styled.img`
+  margin: 5px;
+  height: 25px;
+`;
+
 const EmptyState = () => (
   <EmptyApplicants>
     <CareImage src="/assets/skills/care.png" alt="" />
@@ -137,7 +151,15 @@ class RequestView extends React.Component {
           {tasks
             ? tasks.map((task, index) => (
                 <RequestCard key={task.id}>
-                  <StyledH3>{task.name}</StyledH3>
+                  <CardTitle>
+                    <StyledH3>{task.name}</StyledH3>
+                    <CarePoints>
+                      <CarePointsImage
+                        src="/assets/skills/carePoints.png"
+                        alt=""
+                      />1000
+                    </CarePoints>
+                  </CardTitle>
                   <ApplicantNames>
                     {task.applicants && task.applicants.length > 0 ? (
                       <Titles>
