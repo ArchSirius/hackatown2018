@@ -7,8 +7,11 @@ import H3 from '../../components/H3';
 import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
+import skillsConstants from '../../constants/skillsConstants';
 
-const RequestsBody = styled.div`padding: 0 100px;`;
+const RequestsBody = styled.div`
+  padding: 0 100px;
+`;
 
 const YourRequests = styled.div`
   display: flex;
@@ -39,7 +42,9 @@ const RequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px 5px 15px 5px;
+`;
 
 const ApplicantWrapper = styled.div`
   display: flex;
@@ -51,7 +56,9 @@ const ApplicantWrapper = styled.div`
     color: ${props => props.theme.palette.primary};
   }
 `;
-const ApplicantNames = styled.div`margin: 0 5px;`;
+const ApplicantNames = styled.div`
+  margin: 0 5px;
+`;
 const Applicant = styled.div`
   display: flex;
   flex-basis: 50%;
@@ -82,7 +89,9 @@ const Titles = styled.div`
   margin-bottom: 5px;
   font-weight: 600;
 `;
-const ApplicantTitle = styled.div`flex-basis: 50%;`;
+const ApplicantTitle = styled.div`
+  flex-basis: 50%;
+`;
 const SkillTitle = styled.div`
   flex-basis: 50%;
   text-align: center;
@@ -129,13 +138,17 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CompleteText = styled.span`margin-left: 10px;`;
+const CompleteText = styled.span`
+  margin-left: 10px;
+`;
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const CharityImage = styled.img`height: 15px;`;
+const CharityImage = styled.img`
+  height: 15px;
+`;
 
 const EmptyState = () => (
   <EmptyApplicants>
@@ -152,25 +165,31 @@ class RequestView extends React.Component {
     };
   }
 
-  selectApplicant = id => {
+  selectApplicant = task => {
     console.log('SELECT');
+    this.props.updateTask(task);
+  };
+
+  onCompleteTask = task => {
+    this.props.completeTask(task);
   };
 
   openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
-  submit = ({name, description, address, value, relevantSkills}) => {
-    // Do something with data
+  submit = task => {
     this.setState({ modalIsOpen: false });
-  }
+    this.props.createTask(task);
+  };
 
   render() {
     const { tasks } = this.props;
+    console.log(tasks);
     return (
       <RequestsBody>
         <YourRequests>
@@ -181,20 +200,22 @@ class RequestView extends React.Component {
           <AddRequestModal
             isOpen={this.state.modalIsOpen}
             submit={this.submit}
-            cancel={this.closeModal}/>
+            cancel={this.closeModal}
+          />
         </YourRequests>
 
         <YourRequestCards>
           {tasks
             ? tasks.map((task, index) => (
-                <RequestCard key={task.id}>
+                <RequestCard key={index}>
                   <CardTitle>
                     <StyledH3>{task.name}</StyledH3>
                     <CarePoints>
                       <CarePointsImage
                         src="/assets/skills/carePoints.png"
                         alt=""
-                      />1000
+                      />
+                      {task.value}
                     </CarePoints>
                   </CardTitle>
                   <ApplicantNames>
@@ -206,47 +227,41 @@ class RequestView extends React.Component {
                     ) : null}
                     {task.applicants && task.applicants.length > 0 ? (
                       task.applicants.map(
-                        applicant =>
-                          task.chosen === applicant.id || !task.chosen ? (
+                        (applicant, index) =>
+                          task.chosen === applicant._id || !task.chosen ? (
                             <ApplicantWrapper
-                              key={applicant.id}
+                              key={index}
                               onClick={() => {
-                                this.selectApplicant(5);
+                                this.selectApplicant(task);
                               }}
-                              isChosen={task.chosen === applicant.id}
+                              isChosen={task.hasOwnProperty('chosen')}
                             >
                               <Applicant>
                                 <Icon>
-                                  {task.chosen === applicant.id ? (
+                                  {task.hasOwnProperty('chosen') ? (
                                     <i className="fa fa-check" />
                                   ) : (
                                     <i className="fa fa-circle-o" />
                                   )}
                                 </Icon>
-                                <span>Bob Gratton</span>
+                                <span>{applicant.username}</span>
                               </Applicant>
                               <Skills>
-                                <Skill>
-                                  <Points>100</Points>
-                                  <SkillImage
-                                    src="/assets/skills/carpenter.png"
-                                    alt=""
-                                  />
-                                </Skill>
-                                <Skill>
-                                  <Points>10</Points>
-                                  <SkillImage
-                                    src="/assets/skills/cooker.png"
-                                    alt=""
-                                  />
-                                </Skill>
-                                <Skill>
-                                  <Points>10</Points>
-                                  <SkillImage
-                                    src="/assets/skills/painter.png"
-                                    alt=""
-                                  />
-                                </Skill>
+                                {applicant.skills
+                                  ? applicant.skills.map((skill, index) => (
+                                      <Skill key={index}>
+                                        <Points>{skill.value}</Points>
+                                        <SkillImage
+                                          src={
+                                            skillsConstants[
+                                              skill.name.replace(/\s+/g, '')
+                                            ].iconPath
+                                          }
+                                          alt=""
+                                        />
+                                      </Skill>
+                                    ))
+                                  : null}
                               </Skills>
                             </ApplicantWrapper>
                           ) : null
@@ -257,7 +272,7 @@ class RequestView extends React.Component {
                   </ApplicantNames>
                   {task.chosen ? (
                     <CompleteButton btnType="primary">
-                      <ButtonContent>
+                      <ButtonContent onClick={() => this.onCompleteTask(task)}>
                         <CharityImage src="/assets/skills/charity.png" alt="" />
                         <CompleteText>Complete your kindness</CompleteText>
                       </ButtonContent>

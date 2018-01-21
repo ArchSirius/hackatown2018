@@ -10,7 +10,7 @@ export const createTask = task =>
   }).then(json);
 
 export const updateTask = task =>
-  endpointCall(`/tasks/${task.id}`, {
+  endpointCall(`/tasks/${task._id}`, {
     method: 'PUT',
     headers: JSON_HEADER,
     body: JSON.stringify(task)

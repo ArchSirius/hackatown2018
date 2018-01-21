@@ -17,7 +17,9 @@ const AppliedRequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
+const StyledH3 = styled(H3)`
+  margin: 5px 5px 15px 5px;
+`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -33,14 +35,17 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CardContent = styled.div`margin: 5px;`;
+const CardContent = styled.div`
+  margin: 5px;
+`;
 
 const Status = styled.div`
   display: flex;
   align-items: center;
 `;
 const StatusIcon = styled.div`
-  color: ${props => props.theme.palette.error};
+  color: ${props =>
+    props.isChosen ? props.theme.palette.success : props.theme.palette.error};
   padding: 5px;
 `;
 
@@ -67,8 +72,12 @@ const SpaceBetween = styled.div`
   padding: 10px 0;
 `;
 
-const DriveMeButton = styled(Button)`max-height: 40px;`;
-const DriveMe = styled.span`margin-left: 10px;`;
+const DriveMeButton = styled(Button)`
+  max-height: 40px;
+`;
+const DriveMe = styled.span`
+  margin-left: 10px;
+`;
 
 class RequestView extends React.Component {
   googleRedirect = address => {
@@ -80,42 +89,40 @@ class RequestView extends React.Component {
   };
 
   render() {
-    const { tasks } = this.props;
+    const { tasks, currentUser } = this.props;
     return (
       <div>
         <H2>Your Applied Requests</H2>
         <YourAppliedRequestCards>
           {tasks
-            ? tasks.map(task => (
-                <AppliedRequestCard key={task.id}>
+            ? tasks.map((task, index) => (
+                <AppliedRequestCard key={index}>
                   <CardTitle>
                     <StyledH3>{task.name}</StyledH3>
                     <CarePoints>
                       <CarePointsImage
                         src="/assets/skills/carePoints.png"
                         alt=""
-                      />1000
+                      />
+                      {task.value}
                     </CarePoints>
                   </CardTitle>
                   <CardContent>
-                    <RequestType>Painting</RequestType>
-                    <Description>
-                      A task with a beautiful description of it
-                    </Description>
+                    <RequestType>{task.name}</RequestType>
+                    <Description>{task.description}</Description>
                     <Address>
                       <AddressTitle>Where to go ?</AddressTitle>
-                      666 Evil Road, God Villa
+                      {task.address}
                     </Address>
                     <SpaceBetween>
                       <Status>
-                        <StatusIcon>
+                        <StatusIcon isChosen={task.chosen === currentUser._id}>
                           <i className="fa fa-circle fa-lg" />
                         </StatusIcon>Waiting for taker decision
                       </Status>
                       <DriveMeButton
                         btnType="primary"
-                        onClick={() =>
-                          this.googleRedirect('5030 rue Michel, Saint-Hubert')}
+                        onClick={() => this.googleRedirect(task.address)}
                       >
                         <i className="fa fa-map-marker" />
                         <DriveMe>Drive me</DriveMe>
