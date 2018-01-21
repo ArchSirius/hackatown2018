@@ -30,8 +30,6 @@ const StyledLinkText = styled.p`
   font-size: 14px;
 `;
 
-const LogoutIcon = styled.i`padding: 0 5px;`;
-
 const LinkTab = ({ theme, logout }) => (
   <FlattenLinks>
     <StyledLinkTab

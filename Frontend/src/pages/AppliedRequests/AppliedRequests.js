@@ -71,6 +71,14 @@ const DriveMeButton = styled(Button)`max-height: 40px;`;
 const DriveMe = styled.span`margin-left: 10px;`;
 
 class RequestView extends React.Component {
+  googleRedirect = address => {
+    console.log('GOOGLE');
+    window.open(
+      'https://www.google.com/maps/search/?api=1&query=' + address,
+      '_blank'
+    );
+  };
+
   render() {
     const { tasks } = this.props;
     return (
@@ -104,7 +112,11 @@ class RequestView extends React.Component {
                           <i className="fa fa-circle fa-lg" />
                         </StatusIcon>Waiting for taker decision
                       </Status>
-                      <DriveMeButton btnType="primary">
+                      <DriveMeButton
+                        btnType="primary"
+                        onClick={() =>
+                          this.googleRedirect('5030 rue Michel, Saint-Hubert')}
+                      >
                         <i className="fa fa-map-marker" />
                         <DriveMe>Drive me</DriveMe>
                       </DriveMeButton>
