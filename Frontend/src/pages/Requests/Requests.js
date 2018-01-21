@@ -23,11 +23,7 @@ const AddRequest = styled.div`
   color: ${props => props.theme.palette.primary};
   &:hover {
     cursor: pointer;
-    color: ${props =>
-      Color(props.theme.palette.primary)
-        .fade(0.3)
-        .toString()};
-  }
+    color: ${props => props.theme.palette.primaryDark}
 `;
 
 const YourRequestCards = styled.div`
@@ -240,6 +236,7 @@ class RequestView extends React.Component {
                                 {applicant.skills
                                   ? applicant.skills.map((skill, index) => (
                                       <OverlayTrigger
+                                        key={index}
                                         placement="bottom"
                                         overlay={
                                           <Tooltip>
