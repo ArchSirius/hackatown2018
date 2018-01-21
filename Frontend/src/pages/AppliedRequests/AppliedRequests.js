@@ -13,8 +13,13 @@ const YourAppliedRequestCards = styled.div`
 
 const AppliedRequestCard = styled(Pannel)`
   margin: 20px;
-  min-height: 215px;
+  min-height: 250px;
+  max-height: 250px;
   min-width: 450px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
@@ -48,6 +53,7 @@ const StatusIcon = styled.div`
 const Address = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 const AddressTitle = styled.span`
   font-weight: 600;
