@@ -37,8 +37,11 @@ function handleError(res, statusCode) {
  * Get the demo's main user
  */
 exports.getDemoUser = function(req, res) {
-  return User.findOne({ email: 'patrick@example.com' }, '_id').exec()
+  return User.findOne({ email: 'patrick@example.com' }).exec()
     .then(handleEntityNotFound(res))
+    .then(user => {
+      return user.profile;
+    })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
