@@ -6,8 +6,8 @@ import { userOperations, userSelectors } from '../../redux/modules/user';
 
 class RequestContainer extends Component {
   componentDidMount() {
-    this.props.fetchTasks();
     this.props.fetchUserProfil();
+    this.props.fetchTasks();
   }
 
   render() {
@@ -16,11 +16,11 @@ class RequestContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  tasks: taskSelectors.getMyTasks(state)
+  tasks: taskSelectors.getMyTasks(state),
 });
 const mapDispatchToProps = dispatch => ({
   fetchTasks: () => dispatch(taskOperations.fetchTasks()),
-  fetchUserProfil: () => dispatch(userOperations.fetchLoggedInClient())
+  fetchUserProfil: () => dispatch(userOperations.fetchLoggedInClient()),
 });
 
 RequestContainer = connect(mapStateToProps, mapDispatchToProps)(
