@@ -132,7 +132,7 @@ module.exports = function(override) {
 			"username": "Patrick Williams",
 			"email": "patrick@example.com",
 			"password": "foobarbaz",
-			"points": 25,
+			"points": 50,
 			"skills": [{
 				"name": "cleaning",
 				"value": "4"
