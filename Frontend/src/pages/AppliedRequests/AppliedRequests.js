@@ -87,7 +87,6 @@ class RequestView extends React.Component {
 
   render() {
     const { tasks, currentUser } = this.props;
-    console.log(tasks);
     return (
       <div>
         <H2>Your Applied Requests</H2>

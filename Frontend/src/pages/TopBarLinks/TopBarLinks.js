@@ -30,7 +30,18 @@ const StyledLinkText = styled.p`
   font-size: 14px;
 `;
 
-const LinkTab = ({ theme, logout }) => (
+const CarePoints = styled.div`
+  margin: 5px;
+  display: flex;
+  align-items: center;
+`;
+const CarePointsImage = styled.img`
+  margin: 5px;
+  height: 25px;
+`;
+
+
+const LinkTab = ({ theme, logout, currentUser }) => (
   <FlattenLinks>
     <StyledLinkTab
       to={'/requests/active'}
@@ -46,6 +57,13 @@ const LinkTab = ({ theme, logout }) => (
     >
       <StyledLinkText>Give your kindness</StyledLinkText>
     </StyledLinkTab>
+    <CarePoints>
+      <CarePointsImage
+        src="/assets/skills/carePointsWhite.png"
+        alt=""
+      />
+      {currentUser ? currentUser.points : '-'}
+    </CarePoints>
   </FlattenLinks>
 );
 
