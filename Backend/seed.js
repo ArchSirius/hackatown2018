@@ -216,7 +216,6 @@ module.exports = function() {
 			"creator": users[0],
 			"relevantSkills": ['physical'],
 			"applicants": [users[1], users[9]],
-			"chosen": users[1],
 			"done": true
 		}, {
 			"name": 'Park cleaning',
