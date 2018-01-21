@@ -5,7 +5,7 @@ import { userSelectors } from '../../redux/modules/user';
 
 const mapStateToProps = state => ({
   tasks: taskSelectors.getAppliedTasks(state),
-  currentUser: userSelectors
+  currentUser: userSelectors.currentUser(state)
 });
 const mapDispatchToProps = dispatch => ({});
 

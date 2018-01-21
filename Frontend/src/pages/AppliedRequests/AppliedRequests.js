@@ -115,11 +115,19 @@ class RequestView extends React.Component {
                       {task.address}
                     </Address>
                     <SpaceBetween>
-                      <Status>
-                        <StatusIcon isChosen={task.chosen === currentUser._id}>
-                          <i className="fa fa-circle fa-lg" />
-                        </StatusIcon>Waiting for taker decision
-                      </Status>
+                      {task.chosen === currentUser._id ? (
+                        <Status>
+                          <StatusIcon isChosen={true}>
+                            <i className="fa fa-circle fa-lg" />
+                          </StatusIcon>You have been chosen!
+                        </Status>
+                      ) : (
+                        <Status>
+                          <StatusIcon isChosen={false}>
+                            <i className="fa fa-circle fa-lg" />
+                          </StatusIcon>Waiting for decision ...
+                        </Status>
+                      )}
                       <DriveMeButton
                         btnType="primary"
                         onClick={() => this.googleRedirect(task.address)}
