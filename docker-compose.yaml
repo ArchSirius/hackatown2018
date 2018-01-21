@@ -22,7 +22,7 @@ services:
     environment:
       MONGODB_URI: "mongodb://db/hackatown2018"
       SECRET: "hwhk7lumNzVTldE9dNRblx0r1e5YFyjq"
-      SEED: "true"
+      SEED: "false"
       VIRTUAL_HOST: "api.caremmunity.archsirius.com"
       VIRTUAL_PORT: "8080"
     links:
