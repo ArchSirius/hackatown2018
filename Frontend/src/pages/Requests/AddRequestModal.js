@@ -4,7 +4,6 @@ import Button from '../../components/Button';
 import NumberPicker from '../../components/NumberPicker';
 import skillsConstants from '../../constants/skillsConstants';
 import { skillsToShow } from '../../constants/skillsConstants';
-import Color from 'color';
 import React from 'react';
 import Modal from 'react-modal';
 var Tooltip = require('pui-react-tooltip').Tooltip;
@@ -19,8 +18,8 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
+    transform: 'translate(-50%, -50%)'
+  }
 };
 
 const CompleteButton = styled(Button)`
@@ -56,7 +55,9 @@ const Input = styled.input`
   }
 `;
 
-const StyledNumberPicker = styled(NumberPicker)`margin-bottom: 10px;`;
+const StyledNumberPicker = styled(NumberPicker)`
+  margin-bottom: 10px;
+`;
 
 const StyledLabel = styled.label`
   font-weight: 600;
@@ -64,17 +65,15 @@ const StyledLabel = styled.label`
   width: 100%;
 `;
 
-const Column = styled.div`margin-top: 15px;`;
-
-const CarePoints = styled.div`padding-right: 25px;`;
-
 const Buttons = styled.div`
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
 `;
 
-const Skills = styled.div`display: flex;`;
+const Skills = styled.div`
+  display: flex;
+`;
 const Skill = styled.div`
   display: flex;
   align-items: center;
@@ -101,7 +100,7 @@ class AddRequestModal extends React.Component {
       driving: false,
       writing: false,
       animalcare: false,
-      cleaning: false,
+      cleaning: false
     };
   }
 
@@ -132,15 +131,15 @@ class AddRequestModal extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     let relevantSkills = [];
-    skillsToShow.map(skill => {
-      this.state[skill] ? relevantSkills.push(skill) : null;
-    });
+    skillsToShow.map(
+      skill => (this.state[skill] ? relevantSkills.push(skill) : null)
+    );
     this.props.submit({
       name: this.state.name,
       description: this.state.description,
       address: this.state.address,
       value: this.state.value,
-      relevantSkills,
+      relevantSkills
     });
   };
 
@@ -202,7 +201,7 @@ class AddRequestModal extends React.Component {
           <StyledNumberPicker
             input={{
               value: this.state.value ? this.state.value : 0,
-              onChange: this.changeValue,
+              onChange: this.changeValue
             }}
           />
         </FormWrapper>

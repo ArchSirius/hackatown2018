@@ -4,7 +4,6 @@ import Button from '../../components/Button';
 import AppliedRequests from '../AppliedRequests';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
-import Color from 'color';
 import React from 'react';
 import AddRequestModal from './AddRequestModal';
 import skillsConstants from '../../constants/skillsConstants';
@@ -183,7 +182,7 @@ class RequestView extends React.Component {
   submit = task => {
     this.props.createTask({
       ...task,
-      creator: this.props.currentUser,
+      creator: this.props.currentUser
     });
     this.setState({ modalIsOpen: false });
   };

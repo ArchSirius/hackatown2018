@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AppliedRequests from './AppliedRequests';
-import { taskOperations, taskSelectors } from '../../redux/modules/task';
+import { taskSelectors } from '../../redux/modules/task';
 import { userSelectors } from '../../redux/modules/user';
 
 const mapStateToProps = state => ({
