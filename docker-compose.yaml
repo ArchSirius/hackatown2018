@@ -33,6 +33,16 @@ services:
       - back
     restart: always
 
+  db:
+    image: mongo
+    networks:
+      - back
+      - db
+    restart: always
+    volumes:
+      - configdb:/data/configdb
+      - db:/data/db
+
   admin:
     environment:
       ME_CONFIG_BASICAUTH_USERNAME: "admin"
@@ -44,15 +54,6 @@ services:
       - db
     ports:
       - "8081:8081"
-
-  db:
-    image: mongo
-    networks:
-      - back
-    restart: always
-    volumes:
-      - configdb:/data/configdb
-      - db:/data/db
 
   nginx:
     image: nginx
