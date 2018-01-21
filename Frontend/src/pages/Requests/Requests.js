@@ -174,7 +174,7 @@ class RequestView extends React.Component {
 
   submit = task => {
     this.setState({ modalIsOpen: false });
-    this.props.createTask(task);
+    this.props.createTask({ ...task, creator: this.props.currentUser._id });
   };
 
   render() {
@@ -190,6 +190,7 @@ class RequestView extends React.Component {
             isOpen={this.state.modalIsOpen}
             submit={this.submit}
             cancel={this.closeModal}
+            ariaHideApp={false}
           />
         </YourRequests>
 
@@ -276,7 +277,7 @@ class RequestView extends React.Component {
                       <EmptyState />
                     )}
                   </ApplicantNames>
-                  {task.chosen ? (
+                  {task.chosen && !task.done ? (
                     <CompleteButton btnType="primary">
                       <ButtonContent onClick={() => this.onCompleteTask(task)}>
                         <CharityImage src="/assets/skills/charity.png" alt="" />

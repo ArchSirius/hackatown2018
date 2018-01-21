@@ -12,8 +12,12 @@ export const getMyTasks = state =>
 
 export const getAppliedTasks = state =>
   state.task.byId
-    ? Object.values(state.task.byId).filter(task =>
-        task.applicants.some(user => user._id === state.user.currentUser._id)
+    ? Object.values(state.task.byId).filter(
+        task =>
+          task.applicants.some(
+            user => user._id === state.user.currentUser._id
+          ) &&
+          (!task.chosen || task.chosen === state.user.currentUser._id)
       )
     : [];
 
