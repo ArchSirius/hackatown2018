@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Pannel from '../../components/Pannel';
 import Button from '../../components/Button';
+import AppliedRequests from '../AppliedRequests';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Color from 'color';
@@ -125,6 +126,43 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
+const CardContent = styled.div`margin: 5px;`;
+
+const Status = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const StatusIcon = styled.div`
+  color: ${props => props.theme.palette.error};
+  padding: 5px;
+`;
+
+const Address = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const AddressTitle = styled.span`
+  font-weight: 600;
+  padding: 5px 0;
+`;
+
+const Description = styled.p``;
+
+const RequestType = styled.div`
+  font-weight: 600;
+  margin-bottom: 5px;
+`;
+
+const SpaceBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+`;
+
+const DriveMeButton = styled(Button)`max-height: 40px;`;
+const DriveMe = styled.span`margin-left: 10px;`;
+
 const EmptyState = () => (
   <EmptyApplicants>
     <CareImage src="/assets/skills/care.png" alt="" />
@@ -163,7 +201,7 @@ class RequestView extends React.Component {
                   <ApplicantNames>
                     {task.applicants && task.applicants.length > 0 ? (
                       <Titles>
-                        <ApplicantTitle>Applicants</ApplicantTitle>
+                        <ApplicantTitle>Choose your giver</ApplicantTitle>
                         <SkillTitle>Skills</SkillTitle>
                       </Titles>
                     ) : null}
@@ -227,7 +265,7 @@ class RequestView extends React.Component {
               ))
             : null}
         </YourRequestCards>
-        <H2>Your applied requests</H2>
+        <AppliedRequests />
       </div>
     );
   }
