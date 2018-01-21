@@ -93,7 +93,6 @@ class AddRequestModal extends React.Component {
       description: '',
       address: '',
       value: '',
-      relevantSkills: '',
       cooking: false,
       strong: false,
       carpentry: false,
@@ -132,7 +131,17 @@ class AddRequestModal extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.submit(this.state);
+    let relevantSkills = [];
+    skillsToShow.map(skill => {
+      this.state[skill] ? relevantSkills.push(skill) : null;
+    });
+    this.props.submit({
+      name: this.state.name,
+      description: this.state.description,
+      address: this.state.address,
+      value: this.state.value,
+      relevantSkills,
+    });
   };
 
   toggleSkill = skill => {
