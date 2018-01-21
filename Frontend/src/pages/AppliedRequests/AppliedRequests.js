@@ -17,9 +17,7 @@ const AppliedRequestCard = styled(Pannel)`
   min-width: 450px;
 `;
 
-const StyledH3 = styled(H3)`
-  margin: 5px 5px 15px 5px;
-`;
+const StyledH3 = styled(H3)`margin: 5px 5px 15px 5px;`;
 
 const CardTitle = styled.div`
   display: flex;
@@ -35,9 +33,7 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CardContent = styled.div`
-  margin: 5px;
-`;
+const CardContent = styled.div`margin: 5px;`;
 
 const Status = styled.div`
   display: flex;
@@ -72,12 +68,8 @@ const SpaceBetween = styled.div`
   padding: 10px 0;
 `;
 
-const DriveMeButton = styled(Button)`
-  max-height: 40px;
-`;
-const DriveMe = styled.span`
-  margin-left: 10px;
-`;
+const DriveMeButton = styled(Button)`max-height: 40px;`;
+const DriveMe = styled.span`margin-left: 10px;`;
 
 class RequestView extends React.Component {
   googleRedirect = address => {
@@ -90,6 +82,7 @@ class RequestView extends React.Component {
 
   render() {
     const { tasks, currentUser } = this.props;
+    console.log(tasks);
     return (
       <div>
         <H2>Your Applied Requests</H2>
@@ -108,7 +101,16 @@ class RequestView extends React.Component {
                     </CarePoints>
                   </CardTitle>
                   <CardContent>
-                    <RequestType>{task.name}</RequestType>
+                    <RequestType>
+                      {task.relevantSkills && task.relevantSkills.length > 0
+                        ? task.relevantSkills.map((category, i) => {
+                            if (task.relevantSkills.length - 1 === i) {
+                              return category;
+                            }
+                            return category + ',';
+                          })
+                        : 'Unknown'}
+                    </RequestType>
                     <Description>{task.description}</Description>
                     <Address>
                       <AddressTitle>Where to go ?</AddressTitle>
