@@ -7,6 +7,8 @@ import H3 from '../../components/H3';
 import Color from 'color';
 import React from 'react';
 
+const RequestsBody = styled.div`padding: 0 100px;`;
+
 const YourRequests = styled.div`
   display: flex;
   align-items: center;
@@ -126,43 +128,6 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
-const CardContent = styled.div`margin: 5px;`;
-
-const Status = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const StatusIcon = styled.div`
-  color: ${props => props.theme.palette.error};
-  padding: 5px;
-`;
-
-const Address = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const AddressTitle = styled.span`
-  font-weight: 600;
-  padding: 5px 0;
-`;
-
-const Description = styled.p``;
-
-const RequestType = styled.div`
-  font-weight: 600;
-  margin-bottom: 5px;
-`;
-
-const SpaceBetween = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-`;
-
-const DriveMeButton = styled(Button)`max-height: 40px;`;
-const DriveMe = styled.span`margin-left: 10px;`;
-
 const EmptyState = () => (
   <EmptyApplicants>
     <CareImage src="/assets/skills/care.png" alt="" />
@@ -177,7 +142,7 @@ class RequestView extends React.Component {
   render() {
     const { tasks } = this.props;
     return (
-      <div>
+      <RequestsBody>
         <YourRequests>
           <H2>Your Requests</H2>
           <AddRequest>
@@ -266,7 +231,7 @@ class RequestView extends React.Component {
             : null}
         </YourRequestCards>
         <AppliedRequests />
-      </div>
+      </RequestsBody>
     );
   }
 }
