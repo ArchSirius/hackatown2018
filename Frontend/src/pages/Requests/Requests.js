@@ -26,12 +26,13 @@ const AddRequest = styled.div`
 const YourRequestCards = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const RequestCard = styled(Pannel)`
   margin: 20px;
   min-height: 215px;
-  min-width: 400px;
+  min-width: 450px;
 `;
 
 const StyledH3 = styled(H3)`margin: 5px;`;
@@ -93,11 +94,27 @@ const CompleteButton = styled(Button)`
   justify-content: flex-end;
 `;
 
-const EmptyApplicants = styled.div``;
+const EmptyApplicants = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+`;
+const CareImage = styled.img`
+  margin: 5px;
+  height: 50px;
+`;
+const WaitingText = styled.span`
+  font-size: 18px;
+  font-weight: 600;
+  color: ${props => props.theme.palette.primary};
+`;
 
 const EmptyState = () => (
   <EmptyApplicants>
-    <p>Test</p>
+    <CareImage src="/assets/skills/care.png" alt="" />
+    <WaitingText>Waiting for kindness...</WaitingText>
   </EmptyApplicants>
 );
 
@@ -122,10 +139,12 @@ class RequestView extends React.Component {
                 <RequestCard key={task.id}>
                   <StyledH3>{task.name}</StyledH3>
                   <ApplicantNames>
-                    <Titles>
-                      <ApplicantTitle>Applicants</ApplicantTitle>
-                      <SkillTitle>Skills</SkillTitle>
-                    </Titles>
+                    {task.applicants && task.applicants.length > 0 ? (
+                      <Titles>
+                        <ApplicantTitle>Applicants</ApplicantTitle>
+                        <SkillTitle>Skills</SkillTitle>
+                      </Titles>
+                    ) : null}
                     {task.applicants && task.applicants.length > 0 ? (
                       task.applicants.map(
                         applicant =>
