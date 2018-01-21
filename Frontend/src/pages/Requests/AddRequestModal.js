@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import H2 from '../../components/H2';
 import Button from '../../components/Button';
 import NumberPicker from '../../components/NumberPicker';
+import skillsConstants from '../../constants/skillsConstants';
+import { skillsToShow } from '../../constants/skillsConstants';
 import Color from 'color';
 import React from 'react';
 import Modal from 'react-modal';
+var Tooltip = require('pui-react-tooltip').Tooltip;
+var OverlayTrigger = require('pui-react-overlay-trigger').OverlayTrigger;
 
 // https://www.npmjs.com/package/react-modal
 const customStyles = {
@@ -70,6 +74,17 @@ const Buttons = styled.div`
   justify-content: space-between;
 `;
 
+const Skills = styled.div`display: flex;`;
+const Skill = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+`;
+const SkillImage = styled.img`
+  margin: 5px;
+  height: 25px;
+`;
+
 class AddRequestModal extends React.Component {
   constructor(props) {
     super(props);
@@ -79,6 +94,15 @@ class AddRequestModal extends React.Component {
       address: '',
       value: '',
       relevantSkills: '',
+      cooking: false,
+      strong: false,
+      carpentry: false,
+      painting: false,
+      plumbing: false,
+      driving: false,
+      writing: false,
+      animalcare: false,
+      cleaning: false,
     };
   }
 
@@ -111,6 +135,10 @@ class AddRequestModal extends React.Component {
     this.props.submit(this.state);
   };
 
+  toggleSkill = skill => {
+    this.setState({ [skill]: !this.state[skill] });
+  };
+
   render() {
     const { isOpen, cancel } = this.props;
     return (
@@ -136,11 +164,31 @@ class AddRequestModal extends React.Component {
             onChange={this.changeAddress}
           />
           <StyledLabel>Relevant Skills</StyledLabel>
-          <Input
-            type="text"
-            value={this.state.relevantSkills}
-            onChange={this.changeSkills}
-          />
+          <Skills>
+            {skillsToShow.map((skill, index) => (
+              <OverlayTrigger
+                key={index}
+                placement="bottom"
+                overlay={<Tooltip>{skillsConstants[skill].tooltip}</Tooltip>}
+              >
+                <Skill
+                  key={index}
+                  className="overlay-trigger"
+                  tabIndex="0"
+                  onClick={() => this.toggleSkill(skill)}
+                >
+                  {!this.state[skill] ? (
+                    <SkillImage src={skillsConstants[skill].iconPath} alt="" />
+                  ) : (
+                    <SkillImage
+                      src={skillsConstants[skill].selIconPath}
+                      alt=""
+                    />
+                  )}
+                </Skill>
+              </OverlayTrigger>
+            ))}
+          </Skills>
           <StyledLabel>Care Points</StyledLabel>
           <StyledNumberPicker
             input={{
