@@ -1,12 +1,10 @@
 export default {
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary: '#d32f2f',
-    primaryLight: '#ff6659',
-    primaryDark: '#9a0007',
-    accent1: '#4c4d53',
-    accentLight: '#78797f',
-    accentDark: '#24252a',
+    primary: '#FB8B4C',
+    primaryLight: '#F3CB6F',
+    primaryDark: '#E06231',
+    accent1: '#57575B',
     warning: '#f1c40f',
     success: '#2ecc71',
     error: '#e74c3c',
