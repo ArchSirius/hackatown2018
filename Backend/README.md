@@ -5,7 +5,7 @@
 - [PUT api/tasks/:id](#update-a-task)
 - [GET api/users/:id](#get-specific-user)
 
-#### Get all active tasks
+### Get all active tasks
 `GET api/tasks`
 
 **Body**: Nothing
@@ -43,7 +43,7 @@
 ]
 ```
 
-#### Create a new task
+### Create a new task
 `POST api/tasks`
 
 **Body**:
@@ -88,7 +88,7 @@
 }
 ```
 
-#### Update a task
+### Update a task
 `PUT api/tasks/:id`
 - _To apply on a task, append a user to applicants;_
 - _To choose an applicant, set the chosen field to a valid user id;_
@@ -154,7 +154,7 @@
 }
 ```
 
-#### Get specific user
+### Get specific user
 `GET api/users/:id`
 
 **Body**: Nothing
