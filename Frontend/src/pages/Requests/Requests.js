@@ -128,6 +128,14 @@ const CarePointsImage = styled.img`
   height: 25px;
 `;
 
+const CompleteText = styled.span`margin-left: 10px;`;
+const ButtonContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CharityImage = styled.img`height: 15px;`;
+
 const EmptyState = () => (
   <EmptyApplicants>
     <CareImage src="/assets/skills/care.png" alt="" />
@@ -223,7 +231,10 @@ class RequestView extends React.Component {
                   </ApplicantNames>
                   {task.chosen ? (
                     <CompleteButton btnType="primary">
-                      Complete kindness
+                      <ButtonContent>
+                        <CharityImage src="/assets/skills/charity.png" alt="" />
+                        <CompleteText>Complete your kindness</CompleteText>
+                      </ButtonContent>
                     </CompleteButton>
                   ) : null}
                 </RequestCard>
