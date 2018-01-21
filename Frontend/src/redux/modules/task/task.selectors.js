@@ -27,7 +27,7 @@ export const getAppliedTasks = state =>
 export const getUnassignedTask = state => {
   return state.task.byId
     ? Object.values(state.task.byId)
-        .filter(task => task.creator._id !== state.user.currentUser._id && !task.done)
+        .filter(task => task.creator._id !== state.user.currentUser._id && !task.done && !task.chosen)
         .filter(task => {
           let applicantIds = task.applicants.map(applicant => applicant._id);
           return !applicantIds.includes(state.user.currentUser._id);
