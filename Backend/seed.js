@@ -1,10 +1,10 @@
 var Task = require('./app/task/task.model');
 var User = require('./app/user/user.model');
 
-module.exports = function() {
-	if(process.env.SEED) {
+module.exports = function(override) {
+	if(process.env.SEED || override) {
 		// Clear tasks
-		Task.remove({})
+		return Task.remove({})
 		.then(() => {
 			console.log('Tasks cleared');
 		})
