@@ -1,9 +1,6 @@
 import { endpointCall, json, JSON_HEADER } from '../utils/httpUtils';
 
-export const fetchTask = () =>
-  endpointCall(`/tasks`, {
-    method: 'GET'
-  }).then(json);
+export const fetchTasks = () => endpointCall(`/tasks`).then(json);
 
 export const createTask = task =>
   endpointCall(`/tasks`, {
@@ -19,9 +16,8 @@ export const updateTask = task =>
     body: JSON.stringify(task)
   }).then(json);
 
-export const patchTask = task =>
-  endpointCall(`/tasks/${task.id}`, {
-    method: 'PATCH',
-    headers: JSON_HEADER,
-    body: JSON.stringify(task)
-  }).then(json);
+export default {
+  fetchTasks,
+  createTask,
+  updateTask
+};
