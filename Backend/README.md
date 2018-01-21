@@ -1,7 +1,12 @@
 ## Routes specifications
 
-### `GET api/tasks`
-_Get all active tasks_
+- [GET api/tasks](#get-all-active-tasks)
+- [POST api/tasks](#create-a-new-task)
+- [PUT api/tasks/:id](#update-a-task)
+- [GET api/users/:id](#get-specific-user)
+
+### Get all active tasks
+`GET api/tasks`
 
 **Body**: Nothing
 
@@ -12,10 +17,25 @@ _Get all active tasks_
     "_id": UUID,
     "name": String,
     "description": String,
+    "address": String,
     "value": Integer,
     "relevantSkills": [ String, String, ... ],
     "creator": UUID,
-    "applicants": [ UUID, UUID, ... ],
+    "applicants": [
+      {
+        "_id": UUID,
+        "username": String,
+        "points": Integer,
+        "skills": [ 
+          {
+            "name": String,
+            "value": Integer
+          }, 
+          ...
+        ]
+      }, 
+      ...
+    ],
     "chosen": UUID,
     "done": Boolean
   },
@@ -23,14 +43,15 @@ _Get all active tasks_
 ]
 ```
 
-### `POST api/tasks`
-_Create a new task_
+### Create a new task
+`POST api/tasks`
 
 **Body**:
 ```
 {
   "name": String,
   "description": String,
+  "address": String,
   "value": Integer,
   "relevantSkills": [ String, String, ... ],
   "creator": UUID
@@ -43,27 +64,61 @@ _Create a new task_
   "_id": UUID,
   "name": String,
   "description": String,
+  "address": String,
   "value": Integer,
   "relevantSkills": [ String, String, ... ],
   "creator": UUID,
-  "applicants": [ UUID, UUID, ... ],
+  "applicants": [
+    {
+      "_id": UUID,
+      "username": String,
+      "points": Integer,
+      "skills": [ 
+        {
+          "name": String,
+          "value": Integer
+        }, 
+        ...
+      ]
+    }, 
+    ...
+  ],
   "chosen": UUID,
   "done": Boolean
 }
 ```
 
-### `PUT api/tasks/:id`
-_Apply on a task or choose an applicant_
+### Update a task
+`PUT api/tasks/:id`
+- _To apply on a task, append a user to applicants;_
+- _To choose an applicant, set the chosen field to a valid user id;_
+- _To mark a task as done, set the done field to true._
 
 **Body**:
 ```
 {
+  "_id": UUID,
   "name": String,
   "description": String,
+  "address": String,
   "value": Integer,
   "relevantSkills": [ String, String, ... ],
   "creator": UUID,
-  "applicants": [ UUID, UUID, ... ],
+  "applicants": [
+    {
+      "_id": UUID,
+      "username": String,
+      "points": Integer,
+      "skills": [ 
+        {
+          "name": String,
+          "value": Integer
+        }, 
+        ...
+      ]
+    }, 
+    ...
+  ],
   "chosen": UUID,
   "done": Boolean
 }
@@ -75,56 +130,32 @@ _Apply on a task or choose an applicant_
   "_id": UUID,
   "name": String,
   "description": String,
+  "address": String,
   "value": Integer,
   "relevantSkills": [ String, String, ... ],
   "creator": UUID,
-  "applicants": [ UUID, UUID, ... ],
+  "applicants": [
+    {
+      "_id": UUID,
+      "username": String,
+      "points": Integer,
+      "skills": [ 
+        {
+          "name": String,
+          "value": Integer
+        }, 
+        ...
+      ]
+    }, 
+    ...
+  ],
   "chosen": UUID,
   "done": Boolean
 }
 ```
 
-### `PATCH api/tasks/:id`
-_Change task status_
-
-**Body**:
-```
-{
-  "done": Boolean
-}
-```
-
-**Return**:
-```
-{
-  "task": {
-     "_id": UUID,
-    "name": String,
-    "description": String,
-    "value": Integer,
-    "relevantSkills": [ String, String, ... ],
-    "creator": UUID,
-    "applicants": [ UUID, UUID, ... ],
-    "chosen": UUID,
-    "done": Boolean
-  },
-  "user": {
-    "_id": UUID,
-    "username": String,
-    "points": Integer,
-    "skills": [ 
-      {
-        "name": String,
-        "value": Integer
-      }, 
-      ... 
-    ]
-  },
-}
-```
-
-### `GET api/users/:id`
-_Get specific user_
+### Get specific user
+`GET api/users/:id`
 
 **Body**: Nothing
 
