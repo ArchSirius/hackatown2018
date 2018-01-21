@@ -109,10 +109,7 @@ exports.show = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(user => {
       if (user) {
-        const points = user.points;
         user = user.profile;
-        // Add points
-        user.points = points;
       }
       return user;
     })
