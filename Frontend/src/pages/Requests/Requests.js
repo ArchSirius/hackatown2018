@@ -182,7 +182,7 @@ class RequestView extends React.Component {
         <YourRequests>
           <H2>Your Requests</H2>
           <AddRequest onClick={this.openModal}>
-            <i className="fa fa-plus-circle fa-2x" />
+            <i className="fa fa-plus-circle fa-3x" />
           </AddRequest>
           <AddRequestModal
             isOpen={this.state.modalIsOpen}
